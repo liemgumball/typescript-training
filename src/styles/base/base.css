@@ -1,0 +1,13 @@
+html {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: var(--normal-font-size);
+    color: #fff;
+    background-color: var(--main-background-color);
+    padding: 10px;
+    transition: var(--transition-fast);
+    box-sizing: border-box;
+}
