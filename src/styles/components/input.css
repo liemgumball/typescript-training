@@ -1,0 +1,22 @@
+.input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-weight: var(--medium-font-weight);
+}
+
+select {
+    text-transform: capitalize;
+}
+
+.input--select > option {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    padding: 15px 20px;
+    align-items: center;
+}

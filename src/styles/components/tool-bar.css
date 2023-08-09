@@ -1,0 +1,19 @@
+.tool-bar {
+    display: flex;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.tool-bar__add-song {
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.tool-bar .input {
+    background-color: var(--third-background-color);
+    color: var(--main-font-color);
+    font-size: var(--normal-font-size);
+}

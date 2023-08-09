@@ -1,0 +1,12 @@
+.hidden {
+    display: none;
+}
+
+.dflex {
+    display: flex;
+    align-items: center;
+}
+
+.gap10 {
+    gap: 10px;
+}
