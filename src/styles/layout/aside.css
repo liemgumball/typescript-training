@@ -1,0 +1,37 @@
+.aside {
+    background-color: var(--second-background-color);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    flex-shrink: 1;
+}
+
+.aside > button {
+    height: 57px;
+    background-color: var(--third-background-color);
+    border-radius: 8px;
+    border: none;
+}
+
+.aside__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .aside {
+        flex-direction: row;
+    }
+    .aside__nav {
+        flex-direction: row;
+        max-width: 900px;
+        overflow-x: scroll;
+    }
+    .aside > button {
+        width: 50px;
+    }
+}
