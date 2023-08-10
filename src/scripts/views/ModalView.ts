@@ -15,21 +15,21 @@ class ModalView {
     /**
      * open the modal
      */
-    open = () => {
+    open = (): void => {
         this.modal.classList.add('open')
     }
 
     /**
      * close the modal
      */
-    close = () => {
+    close = (): void => {
         this.modal.classList.remove('open')
     }
 
     /**
      * adding the add song event listener
      */
-    addAddSongListener = () => {
+    addAddSongListener = (): void => {
         this.addSongBtn.addEventListener('click', () => {
             this.open()
             this.modalClose.addEventListener('click', () => this.close())

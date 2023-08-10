@@ -7,7 +7,7 @@ class Controller {
         this.view = view
     }
 
-    init = () => {
+    init = (): void => {
         try {
             this.initModal()
         } catch (error) {
@@ -15,7 +15,7 @@ class Controller {
         }
     }
 
-    initModal = () => {
+    initModal = (): void => {
         this.view.modal.addAddSongListener()
     }
 }
