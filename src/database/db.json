@@ -4,7 +4,7 @@
             "id": "1",
             "title": "𝑷𝒐𝒔𝒕 𝑴𝒂𝒍𝒐𝒏𝒆 𝒑𝒍𝒂𝒚𝒍𝒊𝒔𝒕",
             "artist": "Post malone",
-            "lastEdit": "2023-07-31T09:22:14.951Z",
+            "lastEdited": "2023-07-31T09:22:14.951Z",
             "link": "https://youtu.be/edL-_uUtrEo",
             "img": "https://img.youtube.com/vi/edL-_uUtrEo/0.jpg",
             "genreId": "1898c4daa16-b43"
@@ -15,17 +15,8 @@
             "artist": "Joji",
             "genreId": "2",
             "link": "https://youtu.be/kIEWJ1ljEro",
-            "lastEdit": "2023-07-27T01:38:26.292Z",
+            "lastEdited": "2023-07-27T01:38:26.292Z",
             "img": "https://img.youtube.com/vi/kIEWJ1ljEro/0.jpg"
-        },
-        {
-            "id": "3",
-            "title": "Thế giới có nơi nào cho em",
-            "artist": "Sweet Liquor",
-            "genreId": "1898c4daa16-b43",
-            "link": "https://youtu.be/-xwrhtAs5zY",
-            "lastEdit": "2023-07-27T01:38:06.698Z",
-            "img": "https://img.youtube.com/vi/-xwrhtAs5zY/0.jpg"
         },
         {
             "id": "4",
@@ -33,7 +24,7 @@
             "artist": "Phùng Khánh Linh",
             "genreId": "1898c4daa16-b43",
             "link": "https://youtu.be/lJkiUFGjRe4",
-            "lastEdit": "2023-07-27T01:48:52.599Z",
+            "lastEdited": "2023-07-27T01:48:52.599Z",
             "img": "https://img.youtube.com/vi/lJkiUFGjRe4/0.jpg"
         },
         {
@@ -42,14 +33,14 @@
             "artist": "keshi",
             "genreId": "3",
             "link": "https://youtu.be/ssIiBm0ORuI",
-            "lastEdit": "2023-07-27T01:39:08.142Z",
+            "lastEdited": "2023-07-27T01:39:08.142Z",
             "img": "https://img.youtube.com/vi/ssIiBm0ORuI/0.jpg"
         },
         {
             "id": "1898c43baf6-1e23",
             "title": "ONLY - LEEHI (guitar cover)",
             "artist": "J son",
-            "lastEdit": "2023-07-25T08:56:36.342Z",
+            "lastEdited": "2023-07-25T08:56:36.342Z",
             "link": "https://youtu.be/bd68UDMbgYI",
             "img": "https://img.youtube.com/vi/bd68UDMbgYI/0.jpg",
             "genreId": "1"
@@ -60,7 +51,7 @@
             "artist": "The Weeknd",
             "genreId": "1898c4daa16-b43",
             "link": "https://youtu.be/XXYlFuWEuKI",
-            "lastEdit": "2023-07-25T09:12:12.917Z",
+            "lastEdited": "2023-07-25T09:12:12.917Z",
             "img": "https://img.youtube.com/vi/XXYlFuWEuKI/0.jpg"
         },
         {
@@ -69,13 +60,13 @@
             "artist": "WEAN",
             "genreId": "1898c4daa16-b43",
             "link": "https://youtu.be/yhWCh5IVE04",
-            "lastEdit": "2023-07-25T09:07:41.992Z"
+            "lastEdited": "2023-07-25T09:07:41.992Z"
         },
         {
             "id": "1899509de1e-80b",
             "title": "Chelsea Vs Brighton",
             "artist": "Chelsea",
-            "lastEdit": "2023-07-27T01:49:59.198Z",
+            "lastEdited": "2023-07-27T01:49:59.198Z",
             "link": "https://youtu.be/2MeyQL0pHXs",
             "img": "https://img.youtube.com/vi/2MeyQL0pHXs/0.jpg",
             "genreId": "3"
@@ -84,7 +75,7 @@
             "id": "189950b19fa-806",
             "title": "Vì anh đâu có biết",
             "artist": "Madihu",
-            "lastEdit": "2023-07-27T01:51:20.058Z",
+            "lastEdited": "2023-07-27T01:51:20.058Z",
             "link": "https://youtu.be/02ODKglDVQs",
             "img": "https://img.youtube.com/vi/02ODKglDVQs/0.jpg",
             "genreId": "1898c4daa16-b43"

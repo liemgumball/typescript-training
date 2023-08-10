@@ -19,7 +19,7 @@
     },
     "homepage": "https://github.com/liemgumball/typescript-training#readme",
     "devDependencies": {
-        "parcel": "^2.9.3",
-        "process": "^0.11.10"
+        "@types/node": "^20.4.9",
+        "parcel": "^2.9.3"
     }
 }
