@@ -1,6 +1,5 @@
-import { formatDateTime, getImgUrl, getVideoId } from "../helpers/util"
-import SongModel, { Song } from "../models/SongModel"
-
+import { formatDateTime, getImgUrl, getVideoId } from '../helpers/util'
+import SongModel, { ISong } from '../models/SongModel'
 
 class SongTemplate {
     constructor() {}
@@ -51,7 +50,9 @@ class SongTemplate {
     getSongDetail = (song: SongModel): string => `
         <div class="img-container">
             <iframe width="425" height="240" loading="lazy"
-                src="https://www.youtube.com/embed/${getVideoId(song.link)}?rel=0">
+                src="https://www.youtube.com/embed/${getVideoId(
+                    song.link,
+                )}?rel=0">
             </iframe>
         </div>
         <div class="song-detail">

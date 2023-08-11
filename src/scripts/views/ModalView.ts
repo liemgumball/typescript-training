@@ -1,5 +1,4 @@
 class ModalView {
-
     private modal: HTMLElement
     private modalDialog: HTMLElement
     private modalClose: HTMLElement
@@ -7,9 +6,15 @@ class ModalView {
 
     constructor() {
         this.modal = document.querySelector('.modal')! as HTMLElement
-        this.modalDialog = document.querySelector('.modal__dialog')! as HTMLElement
-        this.modalClose = document.querySelector('.modal__close')! as HTMLElement
-        this.addSongBtn = document.querySelector('#add-song-btn')! as HTMLElement
+        this.modalDialog = document.querySelector(
+            '.modal__dialog',
+        )! as HTMLElement
+        this.modalClose = document.querySelector(
+            '.modal__close',
+        )! as HTMLElement
+        this.addSongBtn = document.querySelector(
+            '#add-song-btn',
+        )! as HTMLElement
     }
 
     /**

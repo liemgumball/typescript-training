@@ -1,12 +1,12 @@
-import GenreService from "../services/GenreService";
-import GenreModel, { IGenre } from "./GenreModel";
+import GenreService from '../services/GenreService'
+import GenreModel, { IGenre } from './GenreModel'
 
 class GenreListModel {
     public list: GenreModel[]
-    private _service: GenreService;
+    private _service: GenreService
 
     constructor() {
-        this._service = new GenreService
+        this._service = new GenreService()
     }
 
     init = async (): Promise<void> => {

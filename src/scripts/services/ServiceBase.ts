@@ -1,23 +1,33 @@
-import { apiMethods } from "../constants/constants"
+import { apiMethods } from '../constants/constants'
 
 class ServiceBase {
     constructor() {}
 
     private request = async <T>(
         path: string,
-        method: apiMethods,
-        body?: T
-        ): Promise<T> => {
-        const response = await fetch(path, {
-            method: method,
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(body),
-        })
-        return await response.json()
+        method: apiMethods, // You need to define or import the `apiMethods` type
+        body?: T,
+    ): Promise<T> => {
+        try {
+            const response = await fetch(path, {
+                method,
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            })
+
+            if (!response.ok) {
+                console.log('first')
+                throw new Error(`Request failed with status ${response.status}`)
+            }
+
+            return await response.json()
+        } catch (err) {
+            throw new Error(`API request failed: ${err.message}`)
+        }
     }
-    
+
     protected get = <T>(path: string): Promise<T> => {
         return this.request(path, apiMethods.GET)
     }

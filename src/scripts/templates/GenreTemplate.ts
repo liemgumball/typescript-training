@@ -1,4 +1,4 @@
-import GenreModel from "../models/GenreModel"
+import GenreModel from '../models/GenreModel'
 
 class GenreTemplate {
     constructor() {}

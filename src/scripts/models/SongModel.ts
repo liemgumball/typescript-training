@@ -1,19 +1,19 @@
 import { IGenre } from './GenreModel'
 
 export interface ISong {
-    id: string;
-    title: string;
-    artist: string;
-    lastEdited: string;
+    id: string
+    title: string
+    artist: string
+    lastEdited: string
     genre: IGenre
     link: string
 }
 
 class SongModel {
-    public id: string;
-    public title: string;
-    public artist: string;
-    public lastEdited: Date;
+    public id: string
+    public title: string
+    public artist: string
+    public lastEdited: Date
     public genre: IGenre
     public link: string
 

@@ -7,9 +7,13 @@ export enum apiMethods {
 }
 
 export const COMMON = {
-    EMPTY: ''
+    EMPTY: '',
 }
 
 export const URL = {
-    SONG_IMG: 'https://img.youtube.com/vi/videoId/0.jpg'
+    SONG_IMG: 'https://img.youtube.com/vi/videoId/0.jpg',
+}
+
+export const MESSAGE = {
+    PROCESS_FAILED: 'Something went wrong! Please try again',
 }

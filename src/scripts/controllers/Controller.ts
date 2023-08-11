@@ -1,5 +1,6 @@
-import Model from "../models/Model";
-import View from "../views/View";
+import { MESSAGE } from '../constants/constants'
+import Model from '../models/Model'
+import View from '../views/View'
 
 class Controller {
     private _view!: View
@@ -11,13 +12,9 @@ class Controller {
     }
 
     init = (): void => {
-        try {
-            this.initModal()
-            this.initGenre()
-            this.initSong()
-        } catch (error) {
-            alert('problem initializing')
-        }
+        this.initModal()
+        this.initGenre()
+        this.initSong()
     }
 
     initModal = (): void => {
@@ -25,13 +22,21 @@ class Controller {
     }
 
     initGenre = async (): Promise<void> => {
-        await this._model.genres.init()
-        this._view.genre.renderList(this._model.genres.list)
+        try {
+            await this._model.genres.init()
+            this._view.genre.renderList(this._model.genres.list)
+        } catch (error) {
+            alert(MESSAGE.PROCESS_FAILED)
+        }
     }
 
     initSong = async (): Promise<void> => {
-        await this._model.songs.init()
-        this._view.songs.renderList(this._model.songs.list)
+        try {
+            await this._model.songs.init()
+            this._view.songs.renderList(this._model.songs.list)
+        } catch (error) {
+            alert(MESSAGE.PROCESS_FAILED)
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-import { COMMON } from "../constants/constants"
+import { COMMON } from '../constants/constants'
 
 class ModalTemplate {
     constructor() {}

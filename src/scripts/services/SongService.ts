@@ -1,4 +1,4 @@
-import ServiceBase from "./ServiceBase";
+import ServiceBase from './ServiceBase'
 
 class SongService extends ServiceBase {
     private _path = `${process.env.API_GATEWAY}/songs?_expand=genre`
