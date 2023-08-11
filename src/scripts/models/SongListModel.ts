@@ -1,5 +1,5 @@
 import SongService from "../services/SongService";
-import SongModel, { Song } from "./SongModel";
+import SongModel, { ISong } from "./SongModel";
 
 class SongListModel {
     public list: SongModel[]
@@ -14,9 +14,9 @@ class SongListModel {
         console.log('list',this.list)
     }
 
-    parseData = (data: Song[]): SongModel[] => {
+    parseData = (data: ISong[]): SongModel[] => {
         console.log('parse',data)
-        return data.map((item: Song) => new SongModel(item))
+        return data.map((item: ISong) => new SongModel(item))
     }
 }
 

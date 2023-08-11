@@ -3,38 +3,38 @@ import { apiMethods } from "../constants/constants"
 class ServiceBase {
     constructor() {}
 
-    private request = async (
+    private request = async <T>(
         path: string,
         method: apiMethods,
-        data?: object | string
-        ): Promise<any> => {
+        body?: T
+        ): Promise<T> => {
         const response = await fetch(path, {
             method: method,
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(body),
         })
         return await response.json()
     }
     
-    protected get = (path: string): object | [] => {
+    protected get = <T>(path: string): Promise<T> => {
         return this.request(path, apiMethods.GET)
     }
 
-    protected post = (path: string, data: any): object => {
+    protected post = <T>(path: string, data: T): Promise<T> => {
         return this.request(path, apiMethods.POST, data)
     }
 
-    protected put = (path: string, data: any): object => {
+    protected put = <T>(path: string, data: T): Promise<T> => {
         return this.request(path, apiMethods.PUT, data)
     }
 
-    protected patch = (path: string, data: any): object => {
+    protected patch = <T>(path: string, data: T): Promise<T> => {
         return this.request(path, apiMethods.PATCH, data)
     }
 
-    protected delete = (path: string): object => {
+    protected delete = <T>(path: string): Promise<T> => {
         return this.request(path, apiMethods.DELETE)
     }
 }

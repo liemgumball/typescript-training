@@ -84,27 +84,51 @@
 
 .data-loading {
     height: 15px;
-    background-color: var(--third-background-color);
+    /* background-color: var(--third-background-color); */
     border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        var(--third-background-color) 25%,
+        var(--fourth-background-color) 50%,
+        var(--third-background-color) 75%
+    );
+    background-size: 300% 100%;
+    animation: loading 10s infinite;
+    transition: all 0s ease-in;
+}
+
+@keyframes loading {
+    0%,
+    100% {
+        background-position: -300% 0;
+    }
+    50% {
+        background-position: 300% 0;
+    }
 }
 
 .song-loading .title {
-    width: 400px;
+    width: 80%;
 }
 
 .song-loading .img {
-    width: 50px;
-    height: 50px;
+    width: 10%;
+    padding-top: 7%;
 }
 
 .song-loading .artist {
-    width: 200px;
+    width: 80%;
 }
 
 .song-loading .genre {
-    width: 100px;
+    width: 70%;
 }
 
-.song-loading .last-edit {
-    width: 200px;
+.song-loading .last-edited {
+    width: 70%;
+}
+
+.song-remove-loading .remove {
+    width: 70%;
+    margin: auto;
 }

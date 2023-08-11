@@ -7,8 +7,8 @@ class GenreService extends ServiceBase {
         super()
     }
 
-    getList = (): [] => {
-        return this.get(this._path) as []
+    getList = <T>(): Promise<T> => {
+        return this.get(this._path)
     }
 }
 

@@ -1,5 +1,5 @@
 import GenreService from "../services/GenreService";
-import GenreModel, { Genre } from "./GenreModel";
+import GenreModel, { IGenre } from "./GenreModel";
 
 class GenreListModel {
     public list: GenreModel[]
@@ -14,8 +14,8 @@ class GenreListModel {
         console.log(this.list)
     }
 
-    parseData = (data: []): GenreModel[] => {
-        return data.map((item: Genre) => new GenreModel(item))
+    parseData = (data: IGenre[]): GenreModel[] => {
+        return data.map((item: IGenre) => new GenreModel(item))
     }
 }
 

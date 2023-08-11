@@ -1,11 +1,11 @@
-import { Genre } from './GenreModel'
+import { IGenre } from './GenreModel'
 
-export interface Song {
+export interface ISong {
     id: string;
     title: string;
     artist: string;
     lastEdited: string;
-    genre: Genre
+    genre: IGenre
     link: string
 }
 
@@ -14,10 +14,10 @@ class SongModel {
     public title: string;
     public artist: string;
     public lastEdited: Date;
-    public genre: Genre
+    public genre: IGenre
     public link: string
 
-    constructor(song: Song) {
+    constructor(song: ISong) {
         this.id = song.id
         this.title = song.title
         this.artist = song.artist
