@@ -18,6 +18,14 @@ class SongListModel {
         console.log('parse', data)
         return data.map((item: ISong) => new SongModel(item))
     }
+
+    getSongsByGenreId = (genreId: string | null): SongModel[] => {
+        if (genreId)
+            return this.list.filter(
+                (item: SongModel) => item.genre.id === genreId,
+            )
+        else return this.list
+    }
 }
 
 export default SongListModel

@@ -1,12 +1,12 @@
 import { generateId } from '../helpers/util'
 
 export interface IGenre {
-    id: string
+    id: string | null
     name: string
 }
 
 class GenreModel {
-    public id: string
+    public id?: string
     public name: string
 
     constructor(genre: IGenre) {

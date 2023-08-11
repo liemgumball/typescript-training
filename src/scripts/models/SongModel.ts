@@ -1,3 +1,4 @@
+import { generateId } from '../helpers/util'
 import { IGenre } from './GenreModel'
 
 export interface ISong {
@@ -10,7 +11,7 @@ export interface ISong {
 }
 
 class SongModel {
-    public id: string
+    public id?: string
     public title: string
     public artist: string
     public lastEdited: Date
@@ -18,7 +19,7 @@ class SongModel {
     public link: string
 
     constructor(song: ISong) {
-        this.id = song.id
+        this.id = song.id || generateId()
         this.title = song.title
         this.artist = song.artist
         this.lastEdited = new Date(song.lastEdited)
