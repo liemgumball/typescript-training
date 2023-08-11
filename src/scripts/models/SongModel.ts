@@ -6,6 +6,7 @@ export interface Song {
     artist: string;
     lastEdited: string;
     genre: Genre
+    link: string
 }
 
 class SongModel {
@@ -14,6 +15,7 @@ class SongModel {
     public artist: string;
     public lastEdited: Date;
     public genre: Genre
+    public link: string
 
     constructor(song: Song) {
         this.id = song.id
@@ -21,6 +23,7 @@ class SongModel {
         this.artist = song.artist
         this.lastEdited = new Date(song.lastEdited)
         this.genre = song.genre
+        this.link = song.link
     }
 }
 
