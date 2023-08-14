@@ -8,7 +8,7 @@ class GenreService extends ServiceBase {
         super()
     }
 
-    getList = (): Promise<IGenre> => this.get(this._path)
+    getList = (): Promise<IGenre[]> => this.get(this._path)
 
     addGenre = (data: IGenre): Promise<IGenre> =>
         this.post<IGenre>(this._path, data)

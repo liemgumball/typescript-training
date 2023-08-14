@@ -2,16 +2,20 @@ import SongService from '../services/SongService'
 import SongModel, { ISong } from './SongModel'
 
 class SongListModel {
-    public list: SongModel[]
+    private _list: SongModel[]
     private _service: SongService
 
     constructor() {
         this._service = new SongService()
     }
 
+    get list() {
+        return this._list
+    }
+
     init = async (): Promise<void> => {
-        this.list = await this.parseData(await this._service.getList())
-        console.log('list', this.list)
+        this._list = await this.parseData(await this._service.getList())
+        console.log('list', this._list)
     }
 
     parseData = (data: ISong[]): SongModel[] => {
@@ -21,10 +25,10 @@ class SongListModel {
 
     getSongsByGenreId = (genreId: string | null): SongModel[] => {
         if (genreId)
-            return this.list.filter(
+            return this._list.filter(
                 (item: SongModel) => item.genre.id === genreId,
             )
-        else return this.list
+        else return this._list
     }
 }
 
