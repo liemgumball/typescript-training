@@ -1,6 +1,7 @@
 import { MESSAGE } from '../constants/constants'
 import { IGenre } from '../models/GenreModel'
 import Model from '../models/Model'
+import SongModel from '../models/SongModel'
 import View from '../views/View'
 
 class Controller {
@@ -39,22 +40,25 @@ class Controller {
         try {
             await this._model.songs.init()
             this._view.song.renderList(this._model.songs.list)
+            this._view.song.addSearchSongListener(this.renderSong)
         } catch (error) {
             alert(MESSAGE.PROCESS_FAILED)
         }
     }
 
-    updateListSong = () => {
-        const songs = this._model.songs.getSongsByGenreId(
+    renderSong = () => {
+        let songs = this._model.songs.getSongsByGenreId(
             this._view.genre.getSelectedGenreId(),
         )
+        songs = this.filterSongByKeyword(songs)
         this._view.song.renderList(songs)
     }
 
     switchGenre = (genreId?: string) => {
         if (genreId !== this._view.genre.getSelectedGenreId()) {
+            this._view.song.clearSearchKeyword()
             this._view.genre.switchGenre(genreId)
-            this.updateListSong()
+            this.renderSong()
         }
     }
 
@@ -89,8 +93,18 @@ class Controller {
             this._model.genres.removeGenre(genreId)
             this._view.genre.removeGenre(genreId)
             this._view.genre.switchGenre()
-            this.updateListSong()
+            this.renderSong()
         } catch (error) {}
+    }
+
+    filterSongByKeyword = (songs: SongModel[]): SongModel[] => {
+        const keyword = this._view.song.getSearchKeyword()
+        return songs.filter((item) => {
+            return (
+                item.title.toLocaleLowerCase().includes(keyword) ||
+                item.artist.toLocaleLowerCase().includes(keyword)
+            )
+        })
     }
 }
 
