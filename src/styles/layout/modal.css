@@ -42,3 +42,24 @@
     height: 100%;
     z-index: 2;
 }
+
+.modal__dialog .img-container {
+    position: relative;
+    border-radius: 8px;
+    width: 100%;
+    min-width: 250px;
+    min-height: 100px;
+    border: 1px solid var(--third-background-color);
+    text-align: center;
+}
+
+.modal__body {
+    display: grid;
+    grid-template-columns: 300px 300px;
+    gap: 20px;
+}
+
+.modal__footer {
+    display: flex;
+    justify-content: space-around;
+}

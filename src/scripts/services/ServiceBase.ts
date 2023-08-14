@@ -40,7 +40,7 @@ class ServiceBase {
         return this.request(path, apiMethods.PUT, data)
     }
 
-    protected patch = <T>(path: string, data: any): Promise<T> => {
+    protected patch = <T>(path: string, data: T): Promise<T> => {
         return this.request(path, apiMethods.PATCH, data)
     }
 

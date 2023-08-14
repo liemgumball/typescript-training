@@ -1,15 +1,10 @@
 import { COMMON } from '../constants/constants'
+import SongModel from '../models/SongModel'
 
 class ModalTemplate {
     constructor() {}
 
-    /**
-     * add song form template
-     * @param {String} title of the Input form
-     * @param {Object} data for the input value
-     * @returns html template of add song form element
-     */
-    getSongInputForm = (title: string, data?: any): string => `
+    getSongInputForm = (title: string, data?: SongModel): string => `
         <div class="modal__header">
             <p class="text text-bold text-big">${title}</p>
         </div>
@@ -21,14 +16,14 @@ class ModalTemplate {
                 id="song__title"
                 placeholder="Song title"
                 required
-                value="${data.title || COMMON.EMPTY}"
+                value="${data?.title || COMMON.EMPTY}"
             />
             <select
                 class="input input--select"
                 name="Genre"
                 id="song__genre"
                 title="Genre"
-                value="${data.genreId || COMMON.EMPTY}"
+                value="${data?.genre?.id || COMMON.EMPTY}"
             >
             </select>
             <input
@@ -38,7 +33,7 @@ class ModalTemplate {
                 id="song__artist"
                 placeholder="Artist"
                 required
-                value="${data.artist || COMMON.EMPTY}"
+                value="${data?.artist || COMMON.EMPTY}"
             />
             <input
                 class="input input--text"
@@ -47,7 +42,7 @@ class ModalTemplate {
                 id="song__link"
                 placeholder="https://youtu.be/videoID"
                 required
-                value="${data.link || COMMON.EMPTY}"
+                value="${data?.link || COMMON.EMPTY}"
             />
         </div>
         <div class="modal__footer">

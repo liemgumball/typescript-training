@@ -1,5 +1,4 @@
-import { parse } from 'path'
-import { URL } from '../constants/constants'
+import { REGEX, URL } from '../constants/constants'
 
 export const generateId = (): string => {
     const timestamp = Date.now().toString(16)
@@ -22,4 +21,8 @@ export function parseData<IT, T>(
     constructor: new (data: IT) => T,
 ): T {
     return new constructor(data)
+}
+
+export const validateSongUrl = (url: string) => {
+    return REGEX.SONG_LINK_URLPATTERN.test(url)
 }

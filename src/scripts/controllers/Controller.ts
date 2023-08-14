@@ -1,7 +1,7 @@
-import { MESSAGE } from '../constants/constants'
+import { MESSAGE, MODAL_TYPE } from '../constants/constants'
 import { IGenre } from '../models/GenreModel'
 import Model from '../models/Model'
-import SongModel from '../models/SongModel'
+import SongModel, { ISong } from '../models/SongModel'
 import View from '../views/View'
 
 class Controller {
@@ -14,36 +14,35 @@ class Controller {
     }
 
     init = (): void => {
-        this.initModal()
-        this.initGenre()
-        this.initSong()
+        try {
+            this.initModal()
+            this.initGenre()
+            this.initSong()
+        } catch (error) {
+            console.log(error)
+            alert(MESSAGE.PROCESS_FAILED)
+        }
     }
 
     initModal = (): void => {
-        this._view.modal.addAddSongListener()
+        this._view.modal.addCloseListener()
+        this._view.modal.addAddSongListener(this.addSong)
+        this._view.modal.addFormSubmitListener(this.saveSong)
     }
 
     initGenre = async (): Promise<void> => {
-        try {
-            await this._model.genres.init()
-            this._view.genre.renderList(this._model.genres.list)
-            this._view.genre.addDelegateSwitchGenreListener(this.switchGenre)
-            this._view.genre.addAddGenreListener(this.addGenre)
-            this._view.genre.addDelegateEditGenreListener(this.editGenre)
-            this._view.genre.addDelegateRemoveGenreListener(this.removeGenre)
-        } catch (error) {
-            alert(MESSAGE.PROCESS_FAILED)
-        }
+        await this._model.genres.init()
+        this._view.genre.renderList(this._model.genres.list)
+        this._view.genre.addDelegateSwitchGenreListener(this.switchGenre)
+        this._view.genre.addAddGenreListener(this.addGenre)
+        this._view.genre.addDelegateEditGenreListener(this.editGenre)
+        this._view.genre.addDelegateRemoveGenreListener(this.removeGenre)
     }
 
     initSong = async (): Promise<void> => {
-        try {
-            await this._model.songs.init()
-            this._view.song.renderList(this._model.songs.list)
-            this._view.song.addSearchSongListener(this.renderSong)
-        } catch (error) {
-            alert(MESSAGE.PROCESS_FAILED)
-        }
+        await this._model.songs.init()
+        this._view.song.renderList(this._model.songs.list)
+        this._view.song.addSearchSongListener(this.renderSong)
     }
 
     renderSong = () => {
@@ -67,6 +66,11 @@ class Controller {
         this._view.genre.addSaveGenreListener(this.saveGenre)
     }
 
+    editGenre = (data: IGenre) => {
+        this._view.genre.genreInputPopup(data)
+        this._view.genre.addSaveGenreListener(this.saveGenre)
+    }
+
     saveGenre = async (data: IGenre): Promise<void> => {
         try {
             const genre = await this._model.genres.saveGenre(data)
@@ -81,11 +85,6 @@ class Controller {
         } catch (err) {
             alert(MESSAGE.PROCESS_FAILED)
         }
-    }
-
-    editGenre = (data: IGenre) => {
-        this._view.genre.genreInputPopup(data)
-        this._view.genre.addSaveGenreListener(this.saveGenre)
     }
 
     removeGenre = async (genreId: string): Promise<void> => {
@@ -105,6 +104,21 @@ class Controller {
                 item.artist.toLocaleLowerCase().includes(keyword)
             )
         })
+    }
+
+    addSong = (): void => {
+        this._view.modal.render(MODAL_TYPE.ADD_SONG)
+        this._view.modal.setSelectOptions(this._model.genres.list)
+    }
+
+    saveSong = async (data: ISong): Promise<void> => {
+        try {
+            const song = await this._model.songs.saveSong(data)
+            song.genre = this._model.genres.getGenreById(data.genreId)
+            this.renderSong()
+        } catch (error) {
+            alert(MESSAGE.GENERAL_ERROR)
+        }
     }
 }
 

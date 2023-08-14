@@ -20,6 +20,9 @@ class GenreListModel {
         this._list = list.map((item) => parseData(item, GenreModel))
     }
 
+    getGenreById = (id: string): GenreModel | undefined =>
+        this._list.find((item) => item.id === id)
+
     saveGenre = async (data: IGenre): Promise<GenreModel> => {
         if (data.id === COMMON.EMPTY) {
             const genre = parseData<IGenre, GenreModel>(
