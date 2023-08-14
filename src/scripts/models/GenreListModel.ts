@@ -1,4 +1,5 @@
 import { COMMON } from '../constants/constants'
+import { parseData } from '../helpers/util'
 import GenreService from '../services/GenreService'
 import GenreModel, { IGenre } from './GenreModel'
 
@@ -15,29 +16,22 @@ class GenreListModel {
     }
 
     init = async (): Promise<void> => {
-        this._list = this.parseData<IGenre[], GenreModel[]>(
-            await this._service.getList(),
-        )
-    }
-
-    parseData<IT, T>(data: IT) {
-        if (data instanceof Array) {
-            return data.map((item: IGenre) => new GenreModel(item)) as T
-        } else {
-            return new GenreModel(data as IGenre) as T
-        }
+        const list = await this._service.getList()
+        this._list = list.map((item) => parseData(item, GenreModel))
     }
 
     saveGenre = async (data: IGenre): Promise<GenreModel> => {
         if (data.id === COMMON.EMPTY) {
-            const genre = this.parseData<IGenre, GenreModel>(
+            const genre = parseData<IGenre, GenreModel>(
                 await this._service.addGenre(data),
+                GenreModel,
             )
             this._list.push(genre)
             return genre
         } else {
-            const genre = this.parseData<IGenre, GenreModel>(
+            const genre = parseData<IGenre, GenreModel>(
                 await this._service.updateGenre(data),
+                GenreModel,
             )
             const idx = this._list.findIndex((item) => item.id === genre.id)
             this._list[idx] = genre

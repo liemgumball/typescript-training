@@ -8,9 +8,7 @@ class SongService extends ServiceBase {
         super()
     }
 
-    getList = <ISong>(): Promise<ISong> => {
-        return this.get(this._path)
-    }
+    getList = (): Promise<ISong[]> => this.get(this._path)
 }
 
 export default SongService
