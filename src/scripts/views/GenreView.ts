@@ -20,41 +20,65 @@ class GenreView {
         this.removeBtn = '.genre__remove'
     }
 
+    /**
+     * renders the given genres list
+     * @param genres list of genres instances
+     */
     renderList = (genres: GenreModel[]): void => {
         genres.forEach(this.renderGenre)
     }
 
+    /**
+     * render the given genre
+     * @param genre genre instance
+     */
     renderGenre = (genre: GenreModel): void => {
         this.listGenreElement.innerHTML +=
             Template.genre.getGenreTemplate(genre)
     }
 
-    getSelectedGenreId = (): string => {
+    /**
+     * get id of the current genre
+     * @returns id of genre
+     */
+    getCurrentGenreId = (): string => {
         const ele = this.listGenreElement.querySelector('li.active')
         return ele?.getAttribute('data-id') || ''
     }
 
+    /**
+     * add delegated event listener switching genre
+     * @param handleSwitchGenre controller handle function
+     */
     addDelegateSwitchGenreListener = (
-        controllerSwitchGenre: (genreId?: string) => void,
+        handleSwitchGenre: (genreId?: string) => void,
     ): void => {
         this.listGenreElement.addEventListener('click', (event) => {
             event.preventDefault()
             const ele = (event.target as HTMLElement).closest(this.genreElement)
             if (ele) {
                 const genreId = ele.getAttribute('data-id')!
-                controllerSwitchGenre(genreId)
+                handleSwitchGenre(genreId)
             }
         })
     }
 
-    addAddGenreListener = (controllerAddGenre: () => void): void => {
+    /**
+     * add event listener adding genre
+     * @param handleAddGenre controller handle function
+     */
+    addAddGenreListener = (handleAddGenre: () => void): void => {
         this.addGenreBtn.addEventListener('click', () => {
-            controllerAddGenre()
+            handleAddGenre()
         })
     }
 
+    /**
+     * add delegated event listener editting genre
+     * @param handleEditGenre controller handle function
+     */
     addDelegateEditGenreListener = (
-        controllerEditGenre: (data: IGenre) => void,
+        handleEditGenre: (data: IGenre) => void,
     ): void => {
         this.listGenreElement.addEventListener('dblclick', (event) => {
             event.preventDefault()
@@ -62,16 +86,20 @@ class GenreView {
                 this.genreElement,
             ) as HTMLElement
             if (ele) {
-                const genreId = ele.getAttribute('data-id')!
+                const genreId = ele.getAttribute('data-id')
                 const genreName = ele.innerText
-                controllerEditGenre({ id: genreId, name: genreName } as IGenre)
+                handleEditGenre({ id: genreId, name: genreName } as IGenre)
             }
         })
     }
 
+    /**
+     * add delegated event listener removing genre
+     * @param handleRemoveGenre controller handle function
+     */
     addDelegateRemoveGenreListener = (
-        controllerRemoveGenre: (genreId: string) => void,
-    ) => {
+        handleRemoveGenre: (genreId: string) => void,
+    ): void => {
         this.listGenreElement.addEventListener('click', (event) => {
             event.preventDefault()
             const removeEle = (event.target as HTMLElement).closest(
@@ -85,15 +113,17 @@ class GenreView {
 
                 //confirm remove including song in the list of genre
                 if (window.confirm(MESSAGE.REMOVE_GENRE_CONFIRM)) {
-                    controllerRemoveGenre(genreId!)
+                    handleRemoveGenre(genreId!)
                 }
             }
         })
     }
 
-    addSaveGenreListener = (
-        controllerSaveGenre: (data: IGenre) => void,
-    ): void => {
+    /**
+     * add event listener saving genre
+     * @param handleSaveGenre controller handle function
+     */
+    addSaveGenreListener = (handleSaveGenre: (data: IGenre) => void): void => {
         const inputElement = this.listGenreElement.querySelector('input')
 
         inputElement?.addEventListener('keydown', (event) => {
@@ -109,14 +139,18 @@ class GenreView {
 
         inputElement?.addEventListener('blur', (event) => {
             const id = inputElement.parentElement?.getAttribute('data-id')
-            controllerSaveGenre({
+            handleSaveGenre({
                 id: id,
                 name: inputElement.value.trim(),
             } as IGenre)
         })
     }
 
-    switchGenre = (genreId?: string) => {
+    /**
+     * switches to the given genre
+     * @param genreId id of the genre
+     */
+    switchGenre = (genreId?: string): void => {
         this.listGenreElement
             .querySelector('li.active')
             ?.classList.remove('active')
@@ -131,6 +165,10 @@ class GenreView {
         }
     }
 
+    /**
+     * render genre text input
+     * @param data data of genre
+     */
     genreInputPopup = (data?: IGenre): void => {
         //add genre case
         if (!data) {
@@ -163,23 +201,32 @@ class GenreView {
         }
     }
 
-    closeInput = () => {
+    /**
+     * close the genre element having input inside
+     */
+    closeInput = (): void => {
         this.listGenreElement.querySelector('input')?.parentElement?.remove()
     }
 
-    updateGenre = (genre: GenreModel | undefined) => {
-        if (genre) {
-            const target = this.listGenreElement.querySelector(
-                'li[data-id="' + genre.id + '"]',
-            ) as HTMLElement
+    /**
+     * update the genre element
+     * @param genre instance of genre
+     */
+    updateGenre = (genre: GenreModel): void => {
+        const target = this.listGenreElement.querySelector(
+            'li[data-id="' + genre.id + '"]',
+        ) as HTMLElement
 
-            //render a genre that active
-            target.outerHTML = Template.genre.getGenreTemplate(genre, true)
-            target.setAttribute('data-id', genre.id)
-        }
+        //render a genre that active
+        target.outerHTML = Template.genre.getGenreTemplate(genre, true)
+        target.setAttribute('data-id', genre.id)
     }
 
-    removeGenre = (genreId: string) => {
+    /**
+     * remove genre element
+     * @param genreId if of genre
+     */
+    removeGenre = (genreId: string): void => {
         this.listGenreElement
             .querySelector('li[data-id="' + genreId + '"]')
             ?.remove()

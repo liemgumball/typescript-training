@@ -16,6 +16,9 @@ class SongListModel {
         return this._list
     }
 
+    /**
+     * initialize the list of songs
+     */
     init = async (): Promise<void> => {
         const list = await this._service.getList()
         this._list = list.map((item) =>
@@ -23,10 +26,20 @@ class SongListModel {
         )
     }
 
+    /**
+     * get the song by its id
+     * @param id id of the song
+     * @returns the song found or undefined
+     */
     getSongById = (id: string): SongModel | undefined =>
         this._list.find((item) => item.id === id)
 
-    getSongsByGenreId = (genreId: string | null): SongModel[] => {
+    /**
+     * get songs following genre or all songs
+     * @param genreId id of the genre
+     * @returns list of songs
+     */
+    getSongsByGenreId = (genreId?: string): SongModel[] => {
         if (genreId)
             return this._list.filter(
                 (item: SongModel) => item.genre?.id === genreId,
@@ -34,10 +47,19 @@ class SongListModel {
         else return this._list
     }
 
+    /**
+     * get the song by its id
+     * @param id id of the song
+     * @returns song instance
+     */
     getIndexById(id: string) {
         return this._list.findIndex((item) => item.id === id)
     }
 
+    /**
+     * update genre of its song
+     * @param genre genre to update
+     */
     updateGenre = (genre: GenreModel): void => {
         this._list.forEach((item) => {
             if (item.genre?.id === genre.id) {
@@ -46,12 +68,19 @@ class SongListModel {
         })
     }
 
+    /**
+     * save the song to server and list
+     * @param data information of song
+     * @returns promise of song instance
+     */
     saveSong = async (data: ISong): Promise<SongModel> => {
+        console.log('saveSong', data)
         if (data.id === COMMON.EMPTY) {
             const song = parseData<ISong, SongModel>(
                 await this._service.addSong(data),
                 SongModel,
             )
+            console.log('saved', song)
             this._list.push(song)
             return song
         } else {
@@ -65,11 +94,19 @@ class SongListModel {
         }
     }
 
+    /**
+     * remove a song from the server and list
+     * @param id id of the song
+     */
     deleteSong = async (id: string): Promise<void> => {
         await this._service.deleteSong(id)
         this._list.splice(this.getIndexById(id), 1)
     }
 
+    /**
+     * remove songs by its genre
+     * @param genreId id of the genre
+     */
     removeSongByGenreId = (genreId: string): void => {
         const songs = this._list.filter((item) => item.genre?.id === genreId)
         songs.forEach((item) => {

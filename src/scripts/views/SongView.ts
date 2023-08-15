@@ -19,6 +19,10 @@ class SongView {
         )! as HTMLInputElement
     }
 
+    /**
+     * render list of songs
+     * @param songs list of songs
+     */
     renderList = (songs: SongModel[]): void => {
         this.songsListElement.innerHTML = COMMON.EMPTY
         if (songs.length) {
@@ -29,18 +33,30 @@ class SongView {
         }
     }
 
+    /**
+     * render a song
+     * @param song instance of song
+     */
     renderSong = (song: SongModel): void => {
         this.songsListElement.innerHTML += Template.song.getSongTemplate(song)
     }
 
-    addSearchSongListener = (controllerFilterSong: () => void): void => {
+    /**
+     * add event listener searching songs
+     * @param handleSearch controller handle function
+     */
+    addSearchSongListener = (handleSearch: () => void): void => {
         this.searchInput.addEventListener('keyup', (event) => {
-            if (event.code !== EVENT_CODE.TAB) controllerFilterSong()
+            if (event.code !== EVENT_CODE.TAB) handleSearch()
         })
     }
 
+    /**
+     * add delegated event listener viewing song details
+     * @param handleViewSongDetails controller handle function
+     */
     addDelegateViewSongDetailListener = (
-        controllerViewSongDetail: (songid: string) => void,
+        handleViewSongDeta: (songid: string) => void,
     ): void => {
         this.songsListElement.addEventListener('click', (event) => {
             event.preventDefault()
@@ -50,13 +66,17 @@ class SongView {
                 const songid = ele
                     .parentElement!.getAttribute('data-id')
                     ?.trim()
-                controllerViewSongDetail(songid!)
+                handleViewSongDeta(songid!)
             }
         })
     }
 
+    /**
+     * add delegated event listener removing song
+     * @param handleRemoveSong controller handle function
+     */
     addDelegateRemoveSongListener = (
-        controllerRemoveSong: (songid: string) => void,
+        handleRemoveSong: (songid: string) => void,
     ): void => {
         this.songsListElement.addEventListener('click', (event) => {
             event.preventDefault()
@@ -67,16 +87,23 @@ class SongView {
                 if (window.confirm(MESSAGE.REMOVE_SONG)) {
                     const songid =
                         removeEle.parentElement!.getAttribute('data-id')
-                    controllerRemoveSong(songid!)
+                    handleRemoveSong(songid!)
                 }
             }
         })
     }
 
+    /**
+     * get the keywords from the search field
+     * @returns keyword
+     */
     getSearchKeyword = (): string => {
         return this.searchInput.value.trim().toLocaleLowerCase()
     }
 
+    /**
+     * clear the search field
+     */
     clearSearchKeyword = (): void => {
         this.searchInput.value = COMMON.EMPTY
     }

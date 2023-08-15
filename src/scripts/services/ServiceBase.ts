@@ -3,6 +3,13 @@ import { apiMethods } from '../constants/constants'
 class ServiceBase {
     constructor() {}
 
+    /**
+     * request to server
+     * @param path path of api endpoint
+     * @param method method of request
+     * @param body data to send
+     * @returns promise of response
+     */
     private request = async <T>(
         path: string,
         method: apiMethods, // You need to define or import the `apiMethods` type
