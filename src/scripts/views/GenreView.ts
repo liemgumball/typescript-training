@@ -7,6 +7,7 @@ class GenreView {
     private addGenreBtn: HTMLElement
     private genreElement: string
     private removeBtn: string
+
     constructor() {
         this.listGenreElement = document.querySelector(
             '.genres__list',
@@ -20,9 +21,7 @@ class GenreView {
     }
 
     renderList = (genres: GenreModel[]): void => {
-        genres.forEach((genre) => {
-            this.renderGenre(genre)
-        }, this)
+        genres.forEach(this.renderGenre)
     }
 
     renderGenre = (genre: GenreModel): void => {
@@ -30,9 +29,9 @@ class GenreView {
             Template.genre.getGenreTemplate(genre)
     }
 
-    getSelectedGenreId = (): string | null => {
+    getSelectedGenreId = (): string => {
         const ele = this.listGenreElement.querySelector('li.active')
-        return ele!.getAttribute('data-id')
+        return ele?.getAttribute('data-id') || ''
     }
 
     addDelegateSwitchGenreListener = (
@@ -40,7 +39,7 @@ class GenreView {
     ): void => {
         this.listGenreElement.addEventListener('click', (event) => {
             event.preventDefault()
-            const ele = (event.target as HTMLElement).closest('li')
+            const ele = (event.target as HTMLElement).closest(this.genreElement)
             if (ele) {
                 const genreId = ele.getAttribute('data-id')!
                 controllerSwitchGenre(genreId)
@@ -59,10 +58,12 @@ class GenreView {
     ): void => {
         this.listGenreElement.addEventListener('dblclick', (event) => {
             event.preventDefault()
-            const ele = (event.target as HTMLElement).closest('li')
+            const ele = (event.target as HTMLElement).closest(
+                this.genreElement,
+            ) as HTMLElement
             if (ele) {
-                const genreId = ele?.getAttribute('data-id')!
-                const genreName = ele?.innerText!
+                const genreId = ele.getAttribute('data-id')!
+                const genreName = ele.innerText
                 controllerEditGenre({ id: genreId, name: genreName } as IGenre)
             }
         })
@@ -139,18 +140,19 @@ class GenreView {
 
             const inputElement = document.createElement('input')
             inputElement.type = 'text'
-            inputElement.className = 'genre-edit '
+            inputElement.className = 'input genre-edit '
 
             genreElement.appendChild(inputElement)
             this.listGenreElement.appendChild(genreElement)
             inputElement.focus()
         } else {
+            //update genre case
             const genreElement = this.listGenreElement.querySelector(
                 'li[data-id="' + data.id + '"]',
             )! as HTMLLIElement
             const inputElement = document.createElement('input')
             inputElement.type = 'text'
-            inputElement.className = 'genre-edit '
+            inputElement.className = 'input genre-edit '
             const value = genreElement.innerText
             genreElement.innerText = COMMON.EMPTY
 
@@ -165,14 +167,16 @@ class GenreView {
         this.listGenreElement.querySelector('input')?.parentElement?.remove()
     }
 
-    updateGenre = (genre: GenreModel) => {
-        const target = this.listGenreElement.querySelector(
-            'li[data-id="' + genre.id + '"]',
-        )
+    updateGenre = (genre: GenreModel | undefined) => {
+        if (genre) {
+            const target = this.listGenreElement.querySelector(
+                'li[data-id="' + genre.id + '"]',
+            ) as HTMLElement
 
-        //render a genre that active
-        target!.outerHTML = Template.genre.getGenreTemplate(genre, true)
-        target!.setAttribute('data-id', genre.id!)
+            //render a genre that active
+            target.outerHTML = Template.genre.getGenreTemplate(genre, true)
+            target.setAttribute('data-id', genre.id)
+        }
     }
 
     removeGenre = (genreId: string) => {

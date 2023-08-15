@@ -1,12 +1,12 @@
-import { MESSAGE, MODAL_TYPE } from '../constants/constants'
+import { COMMON, MESSAGE, MODAL_TYPE } from '../constants/constants'
 import { IGenre } from '../models/GenreModel'
 import Model from '../models/Model'
 import SongModel, { ISong } from '../models/SongModel'
 import View from '../views/View'
 
 class Controller {
-    private _view!: View
-    private _model!: Model
+    private _view: View
+    private _model: Model
 
     constructor(view: View, model: Model) {
         this._view = view
@@ -43,6 +43,7 @@ class Controller {
         this._view.song.renderList(this._model.songs.list)
         this._view.song.addSearchSongListener(this.renderSong)
         this._view.song.addDelegateViewSongDetailListener(this.viewSongDetail)
+        this._view.song.addDelegateRemoveSongListener(this.removeSong)
     }
 
     renderSong = () => {
@@ -72,20 +73,53 @@ class Controller {
     }
 
     saveGenre = async (data: IGenre): Promise<void> => {
-        try {
-            const genre = await this._model.genres.saveGenre(data)
-            if (data.id === '') {
+        if (this.checkGenre(data)) {
+            try {
+                const genre = await this._model.genres.saveGenre(data)
                 // add a new genre case
-                this._view.genre.closeInput()
-                this._view.genre.renderGenre(genre)
-            } else {
+                if (data.id === '') {
+                    this._view.genre.closeInput()
+                    this._view.genre.renderGenre(genre)
+                }
                 //update genre case
-                this._view.genre.updateGenre(genre)
-                this._model.songs.updateGenre(genre)
-                this.renderSong()
+                else {
+                    this._view.genre.updateGenre(genre)
+                    this._model.songs.updateGenre(genre)
+                    this.renderSong()
+                }
+            } catch (err) {
+                alert(MESSAGE.PROCESS_FAILED)
             }
-        } catch (err) {
-            alert(MESSAGE.PROCESS_FAILED)
+        }
+    }
+
+    checkGenre = (data: IGenre): boolean => {
+        // get the selected genre
+        const genre = this._model.genres.getGenreById(
+            this._view.genre.getSelectedGenreId(),
+        )!
+
+        // case value is empty
+        if (!data.name) {
+            // case edit genre
+            if (data.id) {
+                this._view.genre.updateGenre(genre)
+            }
+            // case add new genre
+            else {
+                this._view.genre.removeGenre(COMMON.EMPTY)
+            }
+            return false
+        }
+        // case value is same as other genre
+        else if (!this._model.genres.isValidName(data)) {
+            this._view.genre.updateGenre(genre)
+            alert(MESSAGE.EDIT_GENRE_ERROR)
+            return false
+        }
+        // case valid
+        else {
+            return true
         }
     }
 
@@ -93,9 +127,12 @@ class Controller {
         try {
             this._model.genres.removeGenre(genreId)
             this._view.genre.removeGenre(genreId)
+            this._model.songs.removeSongByGenreId(genreId)
             this._view.genre.switchGenre()
             this.renderSong()
-        } catch (error) {}
+        } catch (error) {
+            alert(MESSAGE.PROCESS_FAILED)
+        }
     }
 
     filterSongByKeyword = (songs: SongModel[]): SongModel[] => {
@@ -129,6 +166,15 @@ class Controller {
         } else {
             alert(MESSAGE.GENERAL_ERROR)
             console.log(MESSAGE.MISSING_ID + id)
+        }
+    }
+
+    removeSong = async (id: string): Promise<void> => {
+        try {
+            await this._model.songs.deleteSong(id)
+            this.renderSong()
+        } catch {
+            alert(MESSAGE.GENERAL_ERROR)
         }
     }
 

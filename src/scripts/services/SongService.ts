@@ -14,6 +14,9 @@ class SongService extends ServiceBase {
 
     updateSong = (data: ISong): Promise<ISong> =>
         this.patch(`${this._path}/${data.id}`, data)
+
+    deleteSong = (id: string): Promise<void> =>
+        this.delete(`${this._path}/${id}`)
 }
 
 export default SongService

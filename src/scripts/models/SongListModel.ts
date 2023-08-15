@@ -34,6 +34,10 @@ class SongListModel {
         else return this._list
     }
 
+    getIndexById(id: string) {
+        return this._list.findIndex((item) => item.id === id)
+    }
+
     updateGenre = (genre: GenreModel): void => {
         this._list.forEach((item) => {
             if (item.genre?.id === genre.id) {
@@ -59,6 +63,18 @@ class SongListModel {
             this._list[idx] = song
             return song
         }
+    }
+
+    deleteSong = async (id: string): Promise<void> => {
+        await this._service.deleteSong(id)
+        this._list.splice(this.getIndexById(id), 1)
+    }
+
+    removeSongByGenreId = (genreId: string): void => {
+        const songs = this._list.filter((item) => item.genre?.id === genreId)
+        songs.forEach((item) => {
+            this._list.splice(this.getIndexById(item.id), 1)
+        })
     }
 }
 

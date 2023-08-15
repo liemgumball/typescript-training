@@ -20,8 +20,20 @@ class GenreListModel {
         this._list = list.map((item) => parseData(item, GenreModel))
     }
 
-    getGenreById = (id: string): GenreModel | undefined =>
-        this._list.find((item) => item.id === id)
+    getGenreById = (id: string): GenreModel | undefined => {
+        return this._list.find((item) => item.id === id)
+    }
+
+    isValidName = (genre: IGenre): boolean => {
+        return this._list.every((item) => {
+            if (item.id === genre.id) return true
+
+            return (
+                item.name.toLowerCase() !== genre.name.toLowerCase() &&
+                genre.name.toLowerCase() !== 'all'
+            )
+        })
+    }
 
     saveGenre = async (data: IGenre): Promise<GenreModel> => {
         if (data.id === COMMON.EMPTY) {
