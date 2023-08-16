@@ -1,4 +1,5 @@
-import { COMMON, EVENT_CODE, MESSAGE } from '../constants/constants'
+import { COMMON, MESSAGE } from '../constants/constants'
+import { EVENT_CODE } from '../constants/enums'
 import GenreModel, { IGenre } from '../models/GenreModel'
 import { Template } from '../templates/Template'
 

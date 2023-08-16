@@ -1,11 +1,3 @@
-export enum apiMethods {
-    GET = 'GET',
-    POST = 'POST',
-    PUT = 'PUT',
-    PATCH = 'PATCH',
-    DELETE = 'DELETE',
-}
-
 // used anywhere
 export const COMMON = {
     EMPTY: '',
@@ -39,28 +31,7 @@ export const MESSAGE = {
     MISSING_ID: "Error: Couldn't find song by ID: ",
 }
 
-// used to detemine the which key typed on the keyboard
-export enum EVENT_CODE {
-    ENTER = 'Enter',
-    ESC = 'Escape',
-    TAB = 'Tab',
-}
-
-// used to define type of the modal to render
-export const MODAL_TYPE = {
-    SONG_DETAIL: 'Song detail',
-    ADD_SONG: 'Add new song',
-    EDIT_SONG: 'Edit song',
-}
-
 // used for validate song link
 export const REGEX = {
     SONG_LINK_URLPATTERN: /^https:\/\/youtu.be\/[^ "]+$/,
-}
-
-export enum inValidGenreFields {
-    EMPTY,
-    REPEATED,
-    ADD,
-    EDIT,
 }

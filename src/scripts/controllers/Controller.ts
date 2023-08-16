@@ -1,9 +1,5 @@
-import {
-    COMMON,
-    MESSAGE,
-    MODAL_TYPE,
-    inValidGenreFields,
-} from '../constants/constants'
+import { COMMON, MESSAGE } from '../constants/constants'
+import { MODAL_TYPE, inValidGenreFields } from '../constants/enums'
 import { IGenre } from '../models/GenreModel'
 import Model from '../models/Model'
 import SongModel, { ISong } from '../models/SongModel'
@@ -111,24 +107,21 @@ class Controller {
         //handle if the data is invalid
         const errors = this.validateGenre(data)
         if (errors.length > 0) {
-            if (errors.includes(inValidGenreFields.EDIT)) {
+            if (errors.includes(inValidGenreFields.Empty)) {
                 // if same as other genres then alert
-                if (errors.includes(inValidGenreFields.REPEATED))
-                    alert(MESSAGE.REPEATED_GENRE_ERROR)
-
-                //rerender current value
-                this._view.genre.updateGenre(
-                    this._model.genres.getGenreById(
-                        this._view.genre.getCurrentGenreId(),
-                    )!,
-                )
+                if (data.id) {
+                    this._view.genre.updateGenre(
+                        this._model.genres.getGenreById(
+                            this._view.genre.getCurrentGenreId(),
+                        )!,
+                    )
+                } else {
+                    this._view.genre.removeGenre(COMMON.EMPTY)
+                }
             } else {
                 // if same as other genres then alert
-                if (errors.includes(inValidGenreFields.REPEATED))
+                if (errors.includes(inValidGenreFields.Repeated))
                     alert(MESSAGE.REPEATED_GENRE_ERROR)
-
-                //remove the input item
-                this._view.genre.removeGenre(COMMON.EMPTY)
             }
         }
         // valid case
@@ -161,15 +154,11 @@ class Controller {
         const errors: number[] = []
         // case value is empty
         if (!data.name) {
-            errors.push(inValidGenreFields.EMPTY)
-            if (data.id) errors.push(inValidGenreFields.EDIT)
-            else errors.push(inValidGenreFields.ADD)
+            errors.push(inValidGenreFields.Empty)
         }
         // case value is same as other genre
         else if (!this._model.genres.isValidName(data)) {
-            errors.push(inValidGenreFields.REPEATED)
-            if (data.id) errors.push(inValidGenreFields.EDIT)
-            else errors.push(inValidGenreFields.ADD)
+            errors.push(inValidGenreFields.Repeated)
         }
         return errors
     }
