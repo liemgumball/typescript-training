@@ -9,12 +9,10 @@ export const URL = {
 
 // used to informate the user
 export const MESSAGE = {
-    PROCESS_FAILED: 'Something went wrong! Please try again',
-    REMOVE_GENRE_CONFIRM:
-        'Do you want to remove this genre including these songs?',
-
-    //if the genre name is invalid,
-    REPEATED_GENRE_ERROR: 'Can not save this genre! Repeated genre name',
+    //snackbar message
+    SAVE_SUCCESS: 'Save Success',
+    SAVE_FAILURE: 'Save Failed',
+    REMOVE_SUCCESS: 'Remove Success',
 
     //confirm remove song
     REMOVE_SONG: 'Do you want to remove this song?',
@@ -27,8 +25,10 @@ export const MESSAGE = {
     LINK_INVALID: 'Invalid link format!',
 
     //use for try catch problems
-    GENERAL_ERROR: 'The process got failed',
-    MISSING_ID: "Error: Couldn't find song by ID: ",
+    PROCESS_FAILED: 'Something went wrong! Please try again',
+    REMOVE_GENRE_CONFIRM:
+        'Do you want to remove this genre including these songs?',
+    REPEATED_GENRE_ERROR: 'Can not save this genre! Repeated genre name',
 }
 
 // used for validate song link

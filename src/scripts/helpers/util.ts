@@ -56,3 +56,8 @@ export function parseData<IT, T>(
 export const validateSongUrl = (url: string): boolean => {
     return REGEX.SONG_LINK_URLPATTERN.test(url)
 }
+
+export const wait = (time: number): Promise<void> =>
+    new Promise<void>((resolve) => {
+        setTimeout(() => resolve(), time)
+    })
