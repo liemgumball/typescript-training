@@ -74,13 +74,11 @@ class SongListModel {
      * @returns promise of song instance
      */
     saveSong = async (data: ISong): Promise<SongModel> => {
-        console.log('saveSong', data)
         if (data.id === COMMON.EMPTY) {
             const song = parseData<ISong, SongModel>(
                 await this._service.addSong(data),
                 SongModel,
             )
-            console.log('saved', song)
             this._list.push(song)
             return song
         } else {

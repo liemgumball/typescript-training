@@ -22,7 +22,7 @@ export const MESSAGE = {
         'Do you want to remove this genre including these songs?',
 
     //if the genre name is invalid,
-    EDIT_GENRE_ERROR: 'Can not save this genre!',
+    REPEATED_GENRE_ERROR: 'Can not save this genre! Repeated genre name',
 
     //confirm remove song
     REMOVE_SONG: 'Do you want to remove this song?',
@@ -56,4 +56,11 @@ export const MODAL_TYPE = {
 // used for validate song link
 export const REGEX = {
     SONG_LINK_URLPATTERN: /^https:\/\/youtu.be\/[^ "]+$/,
+}
+
+export enum inValidGenreFields {
+    EMPTY,
+    REPEATED,
+    ADD,
+    EDIT,
 }

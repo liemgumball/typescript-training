@@ -1,4 +1,9 @@
-import { COMMON, MESSAGE, MODAL_TYPE } from '../constants/constants'
+import {
+    COMMON,
+    MESSAGE,
+    MODAL_TYPE,
+    inValidGenreFields,
+} from '../constants/constants'
 import { IGenre } from '../models/GenreModel'
 import Model from '../models/Model'
 import SongModel, { ISong } from '../models/SongModel'
@@ -103,7 +108,31 @@ class Controller {
      * @param data information of genre
      */
     saveGenre = async (data: IGenre): Promise<void> => {
-        if (this.checkGenre(data)) {
+        //handle if the data is invalid
+        const errors = this.validateGenre(data)
+        if (errors.length > 0) {
+            if (errors.includes(inValidGenreFields.EDIT)) {
+                // if same as other genres then alert
+                if (errors.includes(inValidGenreFields.REPEATED))
+                    alert(MESSAGE.REPEATED_GENRE_ERROR)
+
+                //rerender current value
+                this._view.genre.updateGenre(
+                    this._model.genres.getGenreById(
+                        this._view.genre.getCurrentGenreId(),
+                    )!,
+                )
+            } else {
+                // if same as other genres then alert
+                if (errors.includes(inValidGenreFields.REPEATED))
+                    alert(MESSAGE.REPEATED_GENRE_ERROR)
+
+                //remove the input item
+                this._view.genre.removeGenre(COMMON.EMPTY)
+            }
+        }
+        // valid case
+        else {
             try {
                 const genre = await this._model.genres.saveGenre(data)
                 // add a new genre case
@@ -124,38 +153,25 @@ class Controller {
     }
 
     /**
-     * check if the given genre is available to save and handle if invalid
-     * @param data information of genre
-     * @returns if valid or not
+     * check if the value of genre is valid
+     * @param data data of genre
+     * @returns list of errors
      */
-    checkGenre = (data: IGenre): boolean => {
-        // get the selected genre
-        const genre = this._model.genres.getGenreById(
-            this._view.genre.getCurrentGenreId(),
-        )!
-
+    validateGenre = (data: IGenre): number[] => {
+        const errors: number[] = []
         // case value is empty
         if (!data.name) {
-            // case edit genre
-            if (data.id) {
-                this._view.genre.updateGenre(genre)
-            }
-            // case add new genre
-            else {
-                this._view.genre.removeGenre(COMMON.EMPTY)
-            }
-            return false
+            errors.push(inValidGenreFields.EMPTY)
+            if (data.id) errors.push(inValidGenreFields.EDIT)
+            else errors.push(inValidGenreFields.ADD)
         }
         // case value is same as other genre
         else if (!this._model.genres.isValidName(data)) {
-            this._view.genre.updateGenre(genre)
-            alert(MESSAGE.EDIT_GENRE_ERROR)
-            return false
+            errors.push(inValidGenreFields.REPEATED)
+            if (data.id) errors.push(inValidGenreFields.EDIT)
+            else errors.push(inValidGenreFields.ADD)
         }
-        // case valid
-        else {
-            return true
-        }
+        return errors
     }
 
     /**
