@@ -25,6 +25,49 @@
                 </div>
             </div>
         </header>
-        <script type="text/typescript" src="scripts/main.ts"></script>
+        <main class="main">
+            <aside class="aside">
+                <ul class="aside__nav genres__list">
+                    <li class="genres__list__item active text text-sub">All</li>
+                </ul>
+                <button
+                    id="add-genre-btn"
+                    type="button"
+                    class="btn btn--dark fa fa-plus"
+                    tabindex="3"
+                    title="Add genre"
+                ></button>
+            </aside>
+            <article class="article">
+                <div class="tool-bar">
+                    <button
+                        class="btn btn--primary tool-bar__add-song"
+                        id="add-song-btn"
+                        tabindex="2"
+                        type="button"
+                        title="Add song"
+                    >
+                        <span class="fa fa-plus"></span>
+                        <span class="text text-black text-small">New song</span>
+                    </button>
+                    <div class="input-container">
+                        <span class="fa fa-search"></span>
+                        <input
+                            tabindex="1"
+                            type="text"
+                            title="Search"
+                            name="search-input"
+                            id="search-song-input"
+                            class="input"
+                        />
+                    </div>
+                </div>
+            </article>
+        </main>
+        <div class="modal">
+            <div class="modal__close"></div>
+            <form class="modal__dialog" id="formInputData"></form>
+        </div>
+        <script type="module" src="scripts/main.ts"></script>
     </body>
 </html>
