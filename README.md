@@ -85,7 +85,7 @@ git checkout feature/big-practice
 -   Step 03: Move to folder which just cloned in your computer
 
 ```bash
-cd javascript-training
+cd typescript-training
 ```
 
 -   Step 04: Install packages
