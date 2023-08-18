@@ -1,5 +1,5 @@
-import { COMMON, EVENT_CODE } from '../constants/constants'
-import SongModel, { ISong } from '../models/SongModel'
+import { COMMON, EVENT_CODE, MESSAGE } from '../constants/constants'
+import SongModel from '../models/SongModel'
 import { Template } from '../templates/Template'
 
 class SongView {
@@ -21,9 +21,12 @@ class SongView {
 
     renderList = (songs: SongModel[]): void => {
         this.songsListElement.innerHTML = COMMON.EMPTY
-        songs.forEach((song) => {
-            this.renderSong(song)
-        }, this)
+        if (songs.length) {
+            songs.forEach(this.renderSong)
+        } else {
+            this.songsListElement.innerHTML +=
+                Template.song.getNoneSongTemplate()
+        }
     }
 
     renderSong = (song: SongModel): void => {
@@ -44,10 +47,28 @@ class SongView {
 
             const ele = (event.target as HTMLElement).closest(this.songEle)
             if (ele) {
-                const target = ele
+                const songid = ele
                     .parentElement!.getAttribute('data-id')
                     ?.trim()
-                controllerViewSongDetail(target!)
+                controllerViewSongDetail(songid!)
+            }
+        })
+    }
+
+    addDelegateRemoveSongListener = (
+        controllerRemoveSong: (songid: string) => void,
+    ): void => {
+        this.songsListElement.addEventListener('click', (event) => {
+            event.preventDefault()
+            const removeEle = (event.target as HTMLElement).closest(
+                this.removeBtn,
+            )
+            if (removeEle) {
+                if (window.confirm(MESSAGE.REMOVE_SONG)) {
+                    const songid =
+                        removeEle.parentElement!.getAttribute('data-id')
+                    controllerRemoveSong(songid!)
+                }
             }
         })
     }

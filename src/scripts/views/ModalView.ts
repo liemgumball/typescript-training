@@ -143,10 +143,7 @@ class ModalView {
     }
 
     renderSongInput = (title: string, data?: SongModel): void => {
-        this.modalDialog.setAttribute(
-            'data-id',
-            data?.id ? data.id : COMMON.EMPTY,
-        )
+        this.modalDialog.setAttribute('data-id', data?.id || COMMON.EMPTY)
         const template = Template.modal.getSongInputForm(title, data)
         this.modalDialog.innerHTML = template
         this.modalDialog

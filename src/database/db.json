@@ -4,17 +4,17 @@
       "id": "1",
       "title": "𝑷𝒐𝒔𝒕 𝑴𝒂𝒍𝒐𝒏𝒆 𝒑𝒍𝒂𝒚𝒍𝒊𝒔𝒕",
       "artist": "Post malone",
-      "lastEdited": "2023-07-31T09:22:14.951Z",
+      "lastEdited": "2023-08-15T07:04:29.665Z",
       "link": "https://youtu.be/edL-_uUtrEo",
-      "genreId": "1898c4daa16-b43"
+      "genreId": "eb33LeP"
     },
     {
       "id": "2",
       "title": "Die for you",
       "artist": "Joji",
-      "genreId": "2",
+      "genreId": "tRqQsD0",
       "link": "https://youtu.be/kIEWJ1ljEro",
-      "lastEdited": "2023-07-27T01:38:26.292Z"
+      "lastEdited": "2023-08-15T07:04:08.428Z"
     },
     {
       "id": "4",
@@ -28,17 +28,17 @@
       "id": "5",
       "title": "LIMBO",
       "artist": "keshi",
-      "genreId": "3",
+      "genreId": "eb33LeP",
       "link": "https://youtu.be/ssIiBm0ORuI",
-      "lastEdited": "2023-07-27T01:39:08.142Z"
+      "lastEdited": "2023-08-15T07:04:19.137Z"
     },
     {
       "id": "1898c43baf6-1e23",
       "title": "ONLY - LEEHI (guitar cover)",
       "artist": "J son",
-      "lastEdited": "2023-07-25T08:56:36.342Z",
+      "lastEdited": "2023-08-15T07:04:02.622Z",
       "link": "https://youtu.be/bd68UDMbgYI",
-      "genreId": "1"
+      "genreId": "SJP9pBC"
     },
     {
       "id": "1898c44a024-167c",
@@ -57,14 +57,6 @@
       "lastEdited": "2023-07-25T09:07:41.992Z"
     },
     {
-      "id": "1899509de1e-80b",
-      "title": "Chelsea Vs Brighton",
-      "artist": "Chelsea",
-      "lastEdited": "2023-07-27T01:49:59.198Z",
-      "link": "https://youtu.be/2MeyQL0pHXs",
-      "genreId": "3"
-    },
-    {
       "id": "189950b19fa-806",
       "title": "Vì anh đâu có biết",
       "artist": "Madihu",
@@ -75,20 +67,20 @@
   ],
   "genres": [
     {
-      "id": "1",
+      "id": "1898c4daa16-b43",
+      "name": "pop"
+    },
+    {
+      "id": "SJP9pBC",
       "name": "Jazz"
     },
     {
-      "id": "2",
-      "name": "Rock"
+      "id": "tRqQsD0",
+      "name": "rock"
     },
     {
-      "id": "3",
-      "name": "Hip Hop"
-    },
-    {
-      "id": "1898c4daa16-b43",
-      "name": "pop"
+      "id": "eb33LeP",
+      "name": "hip hop"
     }
   ]
 }

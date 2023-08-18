@@ -1,5 +1,5 @@
 import { formatDateTime, getImgUrl, getVideoId } from '../helpers/util'
-import SongModel, { ISong } from '../models/SongModel'
+import SongModel from '../models/SongModel'
 
 class SongTemplate {
     constructor() {}
@@ -74,7 +74,7 @@ class SongTemplate {
     `
 
     getNoneSongTemplate = (): string => `
-        <li class="li text text-small"> No song found</li>
+        <li class="li text text-sub text-small mt20"> No song found</li>
     `
 }
 
