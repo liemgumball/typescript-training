@@ -35,3 +35,11 @@ export const MESSAGE = {
 export const REGEX = {
     SONG_LINK_URLPATTERN: /^https:\/\/youtu.be\/[^ "]+$/,
 }
+
+export const GENRE_RULES = {
+    GENRE_ITEM_MAX_LENGTH: 10,
+}
+
+export const SONG_RULES = {
+    SONG_ITEM_MAX_LENGTH: 30,
+}

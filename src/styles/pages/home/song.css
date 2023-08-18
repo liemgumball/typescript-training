@@ -4,6 +4,10 @@
     animation: slideIn 0.5s ease forwards;
 }
 
+.song__remove button {
+    padding: 7px;
+}
+
 @keyframes slideIn {
     to {
         opacity: 1;

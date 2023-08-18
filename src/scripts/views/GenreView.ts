@@ -170,7 +170,10 @@ class GenreView {
      * render genre text input
      * @param data data of genre
      */
-    genreInputPopup = (data?: IGenre): void => {
+    genreInputPopup = (
+        getGenreById: (id: string) => GenreModel | undefined,
+        data?: IGenre,
+    ): void => {
         //add genre case
         if (!data) {
             const genreElement = document.createElement('li')
@@ -192,10 +195,10 @@ class GenreView {
             const inputElement = document.createElement('input')
             inputElement.type = 'text'
             inputElement.className = 'input genre-edit '
-            const value = genreElement.innerText
+            // const value = genreElement.innerText
             genreElement.innerText = COMMON.EMPTY
 
-            inputElement.value = value
+            inputElement.value = getGenreById(data.id!)?.name!
 
             genreElement.appendChild(inputElement)
             inputElement.focus()

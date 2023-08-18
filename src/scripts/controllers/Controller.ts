@@ -27,7 +27,11 @@ class Controller {
             await this.initGenre()
             await this.initSong()
         } catch (error) {
-            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
+            this._view.snack.show(
+                MESSAGE_TYPE.Failed,
+                MESSAGE.PROCESS_FAILED,
+                true,
+            )
         }
     }
 
@@ -90,7 +94,7 @@ class Controller {
      * add genre feature
      */
     addGenre = (): void => {
-        this._view.genre.genreInputPopup()
+        this._view.genre.genreInputPopup(this._model.genres.getGenreById)
         this._view.genre.addSaveGenreListener(this.saveGenre)
     }
 
@@ -99,7 +103,7 @@ class Controller {
      * @param data information of the genre
      */
     editGenre = (data: IGenre): void => {
-        this._view.genre.genreInputPopup(data)
+        this._view.genre.genreInputPopup(this._model.genres.getGenreById, data)
         this._view.genre.addSaveGenreListener(this.saveGenre)
     }
 
