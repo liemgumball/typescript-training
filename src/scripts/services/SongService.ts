@@ -9,6 +9,10 @@ class SongService extends ServiceBase {
     }
 
     getList = (): Promise<ISong[]> => this.get(this._path)
+
+    addSong = (data: ISong): Promise<ISong> => this.post(this._path, data)
+
+    updateSong = (data: ISong): Promise<ISong> => this.patch(this._path, data)
 }
 
 export default SongService

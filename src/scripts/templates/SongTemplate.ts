@@ -28,7 +28,7 @@ class SongTemplate {
                 <div
                     class="song__data song__genre text text-small text-light text-sub"
                 >
-                    ${song.genre.name}
+                    ${song.genre?.name}
                 </div>
                 <div
                     class="song__data song__date text text-small text-light text-sub"
@@ -61,7 +61,7 @@ class SongTemplate {
             ${song.artist}
             </p>
             <p class="text text-light text-small text-sub">
-                ${song.genre.name}
+                ${song.genre?.name}
             </p>
         </div>
         <div class="modal__footer">
