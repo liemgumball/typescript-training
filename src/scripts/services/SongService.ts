@@ -1,4 +1,5 @@
 import ServiceBase from './ServiceBase'
+import { ISong } from '../models/SongModel'
 
 class SongService extends ServiceBase {
     private _path = `${process.env.API_GATEWAY}/songs?_expand=genre`
@@ -7,7 +8,7 @@ class SongService extends ServiceBase {
         super()
     }
 
-    getList = <T>(): Promise<T> => {
+    getList = <ISong>(): Promise<ISong> => {
         return this.get(this._path)
     }
 }
