@@ -1,12 +1,12 @@
-import GenreService from "../services/GenreService";
-import GenreModel, { Genre } from "./GenreModel";
+import GenreService from '../services/GenreService'
+import GenreModel, { IGenre } from './GenreModel'
 
 class GenreListModel {
     public list: GenreModel[]
-    private _service: GenreService;
+    private _service: GenreService
 
     constructor() {
-        this._service = new GenreService
+        this._service = new GenreService()
     }
 
     init = async (): Promise<void> => {
@@ -14,8 +14,8 @@ class GenreListModel {
         console.log(this.list)
     }
 
-    parseData = (data: []): GenreModel[] => {
-        return data.map((item: Genre) => new GenreModel(item))
+    parseData = (data: IGenre[]): GenreModel[] => {
+        return data.map((item: IGenre) => new GenreModel(item))
     }
 }
 

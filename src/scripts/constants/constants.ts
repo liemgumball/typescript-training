@@ -1,7 +1,19 @@
 export enum apiMethods {
-    get = 'GET',
-    post = 'POST',
-    put = 'PUT',
-    patch = 'PATCH',
-    delete = 'DELETE',
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    PATCH = 'PATCH',
+    DELETE = 'DELETE',
+}
+
+export const COMMON = {
+    EMPTY: '',
+}
+
+export const URL = {
+    SONG_IMG: 'https://img.youtube.com/vi/videoId/0.jpg',
+}
+
+export const MESSAGE = {
+    PROCESS_FAILED: 'Something went wrong! Please try again',
 }

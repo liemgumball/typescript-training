@@ -1,15 +1,15 @@
-import { generateId } from "../helpers/util";
+import { generateId } from '../helpers/util'
 
-export interface Genre {
-    id: string;
-    name: string;
+export interface IGenre {
+    id: string
+    name: string
 }
 
 class GenreModel {
-    public id: string;
-    public name: string;
+    public id: string
+    public name: string
 
-    constructor(genre: Genre) {
+    constructor(genre: IGenre) {
         this.id = genre.id || generateId()
         this.name = genre.name
     }
