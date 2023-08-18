@@ -13,13 +13,12 @@ class Controller {
         this._model = model
     }
 
-    init = (): void => {
+    init = async (): Promise<void> => {
         try {
             this.initModal()
-            this.initGenre()
-            this.initSong()
+            await this.initGenre()
+            await this.initSong()
         } catch (error) {
-            console.log(error)
             alert(MESSAGE.PROCESS_FAILED)
         }
     }
@@ -43,6 +42,7 @@ class Controller {
         await this._model.songs.init()
         this._view.song.renderList(this._model.songs.list)
         this._view.song.addSearchSongListener(this.renderSong)
+        this._view.song.addDelegateViewSongDetailListener(this.viewSongDetail)
     }
 
     renderSong = () => {
@@ -81,6 +81,8 @@ class Controller {
             } else {
                 //update genre case
                 this._view.genre.updateGenre(genre)
+                this._model.songs.updateGenre(genre)
+                this.renderSong()
             }
         } catch (err) {
             alert(MESSAGE.PROCESS_FAILED)
@@ -109,6 +111,25 @@ class Controller {
     addSong = (): void => {
         this._view.modal.render(MODAL_TYPE.ADD_SONG)
         this._view.modal.setSelectOptions(this._model.genres.list)
+    }
+
+    editSong = (song: SongModel): void => {
+        this._view.modal.render(MODAL_TYPE.EDIT_SONG, song)
+        this._view.modal.setSelectOptions(
+            this._model.genres.list,
+            song.genre?.id,
+        )
+    }
+
+    viewSongDetail = (id: string): void => {
+        const song = this._model.songs.getSongById(id)
+        if (song) {
+            this._view.modal.render(MODAL_TYPE.SONG_DETAIL, song)
+            this._view.modal.addEditSongListener(song, this.editSong)
+        } else {
+            alert(MESSAGE.GENERAL_ERROR)
+            console.log(MESSAGE.MISSING_ID + id)
+        }
     }
 
     saveSong = async (data: ISong): Promise<void> => {

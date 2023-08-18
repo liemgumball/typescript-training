@@ -81,6 +81,16 @@ class ModalView {
         })
     }
 
+    addEditSongListener = (
+        song: SongModel,
+        controllerEditSong: (song: SongModel) => void,
+    ) => {
+        const editBtn = document.querySelector('#modal__dialog__edit-btn')
+        editBtn?.addEventListener('click', () => {
+            controllerEditSong(song)
+        })
+    }
+
     validateInputData = (data: ISong) => {
         {
             let errors = COMMON.EMPTY

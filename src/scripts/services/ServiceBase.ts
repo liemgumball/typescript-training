@@ -18,13 +18,13 @@ class ServiceBase {
             })
 
             if (!response.ok) {
-                console.log('first')
                 throw new Error(`Request failed with status ${response.status}`)
             }
 
             return await response.json()
         } catch (err) {
-            throw new Error(`API request failed: ${err.message}`)
+            console.error('An error occurred in request:', err)
+            throw err
         }
     }
 

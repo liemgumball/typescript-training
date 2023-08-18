@@ -60,7 +60,8 @@
 }
 
 .genre__remove:hover {
-    background-color: var(--orange-color);
+    background-color: var(--green-color);
+    color: var(--third-background-color);
     box-shadow: none;
 }
 

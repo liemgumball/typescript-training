@@ -36,6 +36,22 @@ class SongView {
         })
     }
 
+    addDelegateViewSongDetailListener = (
+        controllerViewSongDetail: (songid: string) => void,
+    ): void => {
+        this.songsListElement.addEventListener('click', (event) => {
+            event.preventDefault()
+
+            const ele = (event.target as HTMLElement).closest(this.songEle)
+            if (ele) {
+                const target = ele
+                    .parentElement!.getAttribute('data-id')
+                    ?.trim()
+                controllerViewSongDetail(target!)
+            }
+        })
+    }
+
     getSearchKeyword = (): string => {
         return this.searchInput.value.trim().toLocaleLowerCase()
     }
