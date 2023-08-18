@@ -10,4 +10,5 @@ body {
     padding: 10px;
     transition: var(--transition-fast);
     box-sizing: border-box;
+    overflow-y: scroll;
 }

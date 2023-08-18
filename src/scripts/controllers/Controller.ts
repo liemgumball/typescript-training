@@ -1,4 +1,9 @@
-import { COMMON, MESSAGE, MODAL_TYPE } from '../constants/constants'
+import { COMMON, MESSAGE } from '../constants/constants'
+import {
+    MODAL_TYPE,
+    MESSAGE_TYPE,
+    inValidGenreFields,
+} from '../constants/enums'
 import { IGenre } from '../models/GenreModel'
 import Model from '../models/Model'
 import SongModel, { ISong } from '../models/SongModel'
@@ -22,7 +27,11 @@ class Controller {
             await this.initGenre()
             await this.initSong()
         } catch (error) {
-            alert(MESSAGE.PROCESS_FAILED)
+            this._view.snack.show(
+                MESSAGE_TYPE.Failed,
+                MESSAGE.PROCESS_FAILED,
+                true,
+            )
         }
     }
 
@@ -85,7 +94,7 @@ class Controller {
      * add genre feature
      */
     addGenre = (): void => {
-        this._view.genre.genreInputPopup()
+        this._view.genre.genreInputPopup(this._model.genres.getGenreById)
         this._view.genre.addSaveGenreListener(this.saveGenre)
     }
 
@@ -94,7 +103,7 @@ class Controller {
      * @param data information of the genre
      */
     editGenre = (data: IGenre): void => {
-        this._view.genre.genreInputPopup(data)
+        this._view.genre.genreInputPopup(this._model.genres.getGenreById, data)
         this._view.genre.addSaveGenreListener(this.saveGenre)
     }
 
@@ -103,7 +112,34 @@ class Controller {
      * @param data information of genre
      */
     saveGenre = async (data: IGenre): Promise<void> => {
-        if (this.checkGenre(data)) {
+        //handle if the data is invalid
+        const errors = this.validateGenre(data)
+        if (errors.length > 0) {
+            if (errors.includes(inValidGenreFields.Empty)) {
+                if (data.id) {
+                    this._view.genre.updateGenre(
+                        this._model.genres.getGenreById(
+                            this._view.genre.getCurrentGenreId(),
+                        )!,
+                    )
+                } else {
+                    this._view.snack.show(
+                        MESSAGE_TYPE.Failed,
+                        MESSAGE.SAVE_FAILURE,
+                    )
+                    this._view.genre.removeGenre(COMMON.EMPTY)
+                }
+            } else {
+                // if same as other genres then alert
+                if (errors.includes(inValidGenreFields.Repeated))
+                    this._view.snack.show(
+                        MESSAGE_TYPE.Failed,
+                        MESSAGE.REPEATED_GENRE_ERROR,
+                    )
+            }
+        }
+        // valid case
+        else {
             try {
                 const genre = await this._model.genres.saveGenre(data)
                 // add a new genre case
@@ -117,45 +153,35 @@ class Controller {
                     this._model.songs.updateGenre(genre)
                     this.renderSong()
                 }
+                this._view.snack.show(
+                    MESSAGE_TYPE.Success,
+                    MESSAGE.SAVE_SUCCESS,
+                )
             } catch (err) {
-                alert(MESSAGE.PROCESS_FAILED)
+                this._view.snack.show(
+                    MESSAGE_TYPE.Failed,
+                    MESSAGE.PROCESS_FAILED,
+                )
             }
         }
     }
 
     /**
-     * check if the given genre is available to save and handle if invalid
-     * @param data information of genre
-     * @returns if valid or not
+     * check if the value of genre is valid
+     * @param data data of genre
+     * @returns list of errors
      */
-    checkGenre = (data: IGenre): boolean => {
-        // get the selected genre
-        const genre = this._model.genres.getGenreById(
-            this._view.genre.getCurrentGenreId(),
-        )!
-
+    validateGenre = (data: IGenre): number[] => {
+        const errors: number[] = []
         // case value is empty
         if (!data.name) {
-            // case edit genre
-            if (data.id) {
-                this._view.genre.updateGenre(genre)
-            }
-            // case add new genre
-            else {
-                this._view.genre.removeGenre(COMMON.EMPTY)
-            }
-            return false
+            errors.push(inValidGenreFields.Empty)
         }
         // case value is same as other genre
         else if (!this._model.genres.isValidName(data)) {
-            this._view.genre.updateGenre(genre)
-            alert(MESSAGE.EDIT_GENRE_ERROR)
-            return false
+            errors.push(inValidGenreFields.Repeated)
         }
-        // case valid
-        else {
-            return true
-        }
+        return errors
     }
 
     /**
@@ -169,8 +195,9 @@ class Controller {
             this._model.songs.removeSongByGenreId(genreId)
             this._view.genre.switchGenre()
             this.renderSong()
+            this._view.snack.show(MESSAGE_TYPE.Success, MESSAGE.REMOVE_SUCCESS)
         } catch (error) {
-            alert(MESSAGE.PROCESS_FAILED)
+            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
         }
     }
 
@@ -219,8 +246,7 @@ class Controller {
             this._view.modal.render(MODAL_TYPE.SONG_DETAIL, song)
             this._view.modal.addEditSongListener(song, this.editSong)
         } else {
-            alert(MESSAGE.GENERAL_ERROR)
-            console.log(MESSAGE.MISSING_ID + id)
+            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
         }
     }
 
@@ -232,8 +258,9 @@ class Controller {
         try {
             await this._model.songs.deleteSong(id)
             this.renderSong()
+            this._view.snack.show(MESSAGE_TYPE.Success, MESSAGE.REMOVE_SUCCESS)
         } catch {
-            alert(MESSAGE.GENERAL_ERROR)
+            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
         }
     }
 
@@ -246,8 +273,9 @@ class Controller {
             const song = await this._model.songs.saveSong(data)
             song.genre = this._model.genres.getGenreById(data.genreId)
             this.renderSong()
+            this._view.snack.show(MESSAGE_TYPE.Success, MESSAGE.SAVE_SUCCESS)
         } catch (error) {
-            alert(MESSAGE.GENERAL_ERROR)
+            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
         }
     }
 }

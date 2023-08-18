@@ -1,4 +1,4 @@
-import { REGEX, URL } from '../constants/constants'
+import { GENRE_RULES, REGEX, SONG_RULES, URL } from '../constants/constants'
 
 /**
  * generate random ID
@@ -56,3 +56,18 @@ export function parseData<IT, T>(
 export const validateSongUrl = (url: string): boolean => {
     return REGEX.SONG_LINK_URLPATTERN.test(url)
 }
+
+export const wait = (time: number): Promise<void> =>
+    new Promise<void>((resolve) => {
+        setTimeout(() => resolve(), time)
+    })
+
+export const genreNameDisplay = (name: string): string =>
+    name.length < GENRE_RULES.GENRE_ITEM_MAX_LENGTH
+        ? name
+        : name.slice(0, GENRE_RULES.GENRE_ITEM_MAX_LENGTH) + '...'
+
+export const songNameDisplay = (name: string) =>
+    name.length < SONG_RULES.SONG_ITEM_MAX_LENGTH
+        ? name
+        : name.slice(0, SONG_RULES.SONG_ITEM_MAX_LENGTH) + '...'

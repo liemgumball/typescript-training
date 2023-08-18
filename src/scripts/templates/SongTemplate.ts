@@ -1,4 +1,10 @@
-import { formatDateTime, getImgUrl, getVideoId } from '../helpers/util'
+import {
+    formatDateTime,
+    genreNameDisplay,
+    getImgUrl,
+    getVideoId,
+    songNameDisplay,
+} from '../helpers/util'
 import SongModel from '../models/SongModel'
 
 class SongTemplate {
@@ -18,7 +24,7 @@ class SongTemplate {
                         src="${getImgUrl(song.link)}"
                         alt="title image"
                     />
-                    <span> ${song.title} </span>
+                    <span> ${songNameDisplay(song.title)} </span>
                 </div>
                 <div
                 class="song__data song__artist text text-small text-light text-sub"
@@ -28,7 +34,7 @@ class SongTemplate {
                 <div
                     class="song__data song__genre text text-small text-light text-sub"
                 >
-                    ${song.genre?.name}
+                ${genreNameDisplay(song.genre?.name!)}
                 </div>
                 <div
                     class="song__data song__date text text-small text-light text-sub"
@@ -37,7 +43,7 @@ class SongTemplate {
                 </div>
             </div>
             <div class="song__remove">
-                <button class="btn btn--icon fa fa-trash"></button>
+                <button class="btn btn--icon fas fa-trash"></button>
             </div>
         </li>
     `

@@ -1,15 +1,15 @@
 {
   "songs": [
     {
-      "id": "6598c43baf6-1e77",
-      "title": "𝑷𝒐𝒔𝒕 𝑴𝒂𝒍𝒐𝒏𝒆 𝒑𝒍𝒂𝒚𝒍𝒊𝒔𝒕",
+      "id": "bNR7imY",
+      "title": "Post Malone playlist",
       "artist": "Post malone",
-      "lastEdited": "2023-08-15T07:04:29.665Z",
+      "lastEdited": "2023-08-16T10:12:12.717Z",
       "link": "https://youtu.be/edL-_uUtrEo",
       "genreId": "eb33LeP"
     },
     {
-      "id": "1888c43baf6-1e99",
+      "id": "bNR8ymY",
       "title": "Die for you",
       "artist": "Joji",
       "genreId": "tRqQsD0",
@@ -17,15 +17,15 @@
       "lastEdited": "2023-08-15T07:04:08.428Z"
     },
     {
-      "id": "1818c43baf6-1e43",
+      "id": "bNR5ymY",
       "title": "Năm ngoái giờ này",
       "artist": "Phùng Khánh Linh",
-      "genreId": "1898c4daa16-b43",
+      "genreId": "tRqQsD1",
       "link": "https://youtu.be/lJkiUFGjRe4",
       "lastEdited": "2023-07-27T01:48:52.599Z"
     },
     {
-      "id": "1898c48baf6-1e21",
+      "id": "bNR4ymY",
       "title": "LIMBO",
       "artist": "keshi",
       "genreId": "eb33LeP",
@@ -33,7 +33,7 @@
       "lastEdited": "2023-08-15T07:04:19.137Z"
     },
     {
-      "id": "1898c43baf6-1e23",
+      "id": "bNR3ymY",
       "title": "ONLY - LEEHI (guitar cover)",
       "artist": "J son",
       "lastEdited": "2023-08-15T07:04:02.622Z",
@@ -41,41 +41,33 @@
       "genreId": "SJP9pBC"
     },
     {
-      "id": "1898c44a024-167c",
+      "id": "bNR2ymY",
       "title": "Save your tears",
       "artist": "The Weeknd",
-      "genreId": "1898c4daa16-b43",
+      "genreId": "tRqQsD1",
       "link": "https://youtu.be/XXYlFuWEuKI",
       "lastEdited": "2023-07-25T09:12:12.917Z"
     },
     {
-      "id": "1898c4d9a3c-1e4f",
+      "id": "bNR1ymY",
       "title": "badbye",
       "artist": "WEAN",
-      "genreId": "1898c4daa16-b43",
+      "genreId": "tRqQsD1",
       "link": "https://youtu.be/yhWCh5IVE04",
       "lastEdited": "2023-07-25T09:07:41.992Z"
     },
     {
-      "id": "189950b19fa-806",
+      "id": "bNR0ymY",
       "title": "Vì anh đâu có biết",
       "artist": "Madihu",
       "lastEdited": "2023-07-27T01:51:20.058Z",
       "link": "https://youtu.be/02ODKglDVQs",
-      "genreId": "1898c4daa16-b43"
-    },
-    {
-      "id": "bNR9ymY",
-      "title": "Die for you",
-      "artist": "Bun",
-      "lastEdited": "2023-08-15T10:08:32.837Z",
-      "link": "https://youtu.be/8Ml-iN8me8g",
-      "genreId": "1898c4daa16-b43"
+      "genreId": "tRqQsD1"
     }
   ],
   "genres": [
     {
-      "id": "1898c4daa16-b43",
+      "id": "tRqQsD1",
       "name": "pop"
     },
     {
@@ -88,7 +80,7 @@
     },
     {
       "id": "eb33LeP",
-      "name": "hip hop"
+      "name": "Hip Hop"
     }
   ]
 }

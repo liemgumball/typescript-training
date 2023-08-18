@@ -1,8 +1,9 @@
-import { COMMON, MESSAGE, MODAL_TYPE } from '../constants/constants'
+import { COMMON, MESSAGE } from '../constants/constants'
 import SongModel, { ISong } from '../models/SongModel'
 import { Template } from '../templates/Template'
 import GenreModel from '../models/GenreModel'
 import { validateSongUrl } from '../helpers/util'
+import { MODAL_TYPE } from '../constants/enums'
 
 class ModalView {
     private modal: HTMLElement

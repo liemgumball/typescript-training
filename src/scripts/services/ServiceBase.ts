@@ -1,4 +1,4 @@
-import { apiMethods } from '../constants/constants'
+import { apiMethods } from '../constants/enums'
 
 class ServiceBase {
     constructor() {}
@@ -12,7 +12,7 @@ class ServiceBase {
      */
     private request = async <T>(
         path: string,
-        method: apiMethods, // You need to define or import the `apiMethods` type
+        method: apiMethods,
         body?: T,
     ): Promise<T> => {
         try {
@@ -36,23 +36,23 @@ class ServiceBase {
     }
 
     protected get = <T>(path: string): Promise<T> => {
-        return this.request(path, apiMethods.GET)
+        return this.request(path, apiMethods.Get)
     }
 
     protected post = <T>(path: string, data: T): Promise<T> => {
-        return this.request(path, apiMethods.POST, data)
+        return this.request(path, apiMethods.Post, data)
     }
 
     protected put = <T>(path: string, data: T): Promise<T> => {
-        return this.request(path, apiMethods.PUT, data)
+        return this.request(path, apiMethods.Put, data)
     }
 
     protected patch = <T>(path: string, data: T): Promise<T> => {
-        return this.request(path, apiMethods.PATCH, data)
+        return this.request(path, apiMethods.Patch, data)
     }
 
     protected delete = <T>(path: string): Promise<T> => {
-        return this.request(path, apiMethods.DELETE)
+        return this.request(path, apiMethods.Delete)
     }
 }
 
