@@ -1,4 +1,5 @@
-import { URL } from "../constants/constants"
+import { parse } from 'path'
+import { URL } from '../constants/constants'
 
 export const generateId = (): string => {
     const timestamp = Date.now().toString(16)
@@ -15,3 +16,10 @@ export const getImgUrl = (link: string): string => {
 }
 
 export const getVideoId = (link: string): string => link.slice(17)
+
+export function parseData<IT, T>(
+    data: IT,
+    constructor: new (data: IT) => T,
+): T {
+    return new constructor(data)
+}

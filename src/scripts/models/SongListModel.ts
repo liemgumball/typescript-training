@@ -1,30 +1,32 @@
+import { parseData } from '../helpers/util'
 import SongService from '../services/SongService'
 import SongModel, { ISong } from './SongModel'
 
 class SongListModel {
-    public list: SongModel[]
+    private _list: SongModel[]
     private _service: SongService
 
     constructor() {
         this._service = new SongService()
     }
 
-    init = async (): Promise<void> => {
-        this.list = await this.parseData(await this._service.getList())
-        console.log('list', this.list)
+    get list() {
+        return this._list
     }
 
-    parseData = (data: ISong[]): SongModel[] => {
-        console.log('parse', data)
-        return data.map((item: ISong) => new SongModel(item))
+    init = async (): Promise<void> => {
+        const list = await this._service.getList()
+        this._list = list.map((item) =>
+            parseData<ISong, SongModel>(item, SongModel),
+        )
     }
 
     getSongsByGenreId = (genreId: string | null): SongModel[] => {
         if (genreId)
-            return this.list.filter(
+            return this._list.filter(
                 (item: SongModel) => item.genre.id === genreId,
             )
-        else return this.list
+        else return this._list
     }
 }
 

@@ -1,51 +1,48 @@
+import { COMMON } from '../constants/constants'
+import { parseData } from '../helpers/util'
 import GenreService from '../services/GenreService'
 import GenreModel, { IGenre } from './GenreModel'
 
 class GenreListModel {
-    public list: GenreModel[]
+    private _list: GenreModel[]
     private _service: GenreService
 
     constructor() {
         this._service = new GenreService()
     }
 
-    init = async (): Promise<void> => {
-        this.list = this.parseData(
-            await this._service.getList(),
-        ) as GenreModel[]
-        console.log(this.list)
+    get list() {
+        return this._list
     }
 
-    parseData = (data: IGenre | IGenre[]): GenreModel | GenreModel[] => {
-        if (data instanceof Array) {
-            return data.map((item: IGenre) => new GenreModel(item))
-        } else {
-            return new GenreModel(data)
-        }
+    init = async (): Promise<void> => {
+        const list = await this._service.getList()
+        this._list = list.map((item) => parseData(item, GenreModel))
     }
 
     saveGenre = async (data: IGenre): Promise<GenreModel> => {
-        console.log('saveGenre', typeof data.id)
-        if (data.id === '') {
-            const genre = this.parseData(
+        if (data.id === COMMON.EMPTY) {
+            const genre = parseData<IGenre, GenreModel>(
                 await this._service.addGenre(data),
-            ) as GenreModel
-            this.list.push(genre)
+                GenreModel,
+            )
+            this._list.push(genre)
             return genre
         } else {
-            const genre = this.parseData(
+            const genre = parseData<IGenre, GenreModel>(
                 await this._service.updateGenre(data),
-            ) as GenreModel
-            const idx = this.list.findIndex((item) => item.id === genre.id)
-            this.list[idx] = genre
+                GenreModel,
+            )
+            const idx = this._list.findIndex((item) => item.id === genre.id)
+            this._list[idx] = genre
             return genre
         }
     }
 
     removeGenre = async (genreId: string) => {
         await this._service.deleteGenre(genreId)
-        const idx = this.list.findIndex((item) => item.id === genreId)
-        this.list.splice(idx, 1)
+        const idx = this._list.findIndex((item) => item.id === genreId)
+        this._list.splice(idx, 1)
     }
 }
 
