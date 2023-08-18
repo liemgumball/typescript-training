@@ -25,7 +25,7 @@ export enum MODAL_TYPE {
     EDIT_SONG = 'Edit song',
 }
 
-export enum SNACKBAR_TYPE {
+export enum MESSAGE_TYPE {
     Failed = 0,
     Success = 1,
 }

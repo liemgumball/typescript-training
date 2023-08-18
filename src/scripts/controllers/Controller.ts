@@ -1,7 +1,7 @@
 import { COMMON, MESSAGE } from '../constants/constants'
 import {
     MODAL_TYPE,
-    SNACKBAR_TYPE,
+    MESSAGE_TYPE,
     inValidGenreFields,
 } from '../constants/enums'
 import { IGenre } from '../models/GenreModel'
@@ -27,10 +27,7 @@ class Controller {
             await this.initGenre()
             await this.initSong()
         } catch (error) {
-            this._view.snack.render(
-                SNACKBAR_TYPE.Failed,
-                MESSAGE.PROCESS_FAILED,
-            )
+            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
         }
     }
 
@@ -122,8 +119,8 @@ class Controller {
                         )!,
                     )
                 } else {
-                    this._view.snack.render(
-                        SNACKBAR_TYPE.Failed,
+                    this._view.snack.show(
+                        MESSAGE_TYPE.Failed,
                         MESSAGE.SAVE_FAILURE,
                     )
                     this._view.genre.removeGenre(COMMON.EMPTY)
@@ -131,8 +128,8 @@ class Controller {
             } else {
                 // if same as other genres then alert
                 if (errors.includes(inValidGenreFields.Repeated))
-                    this._view.snack.render(
-                        SNACKBAR_TYPE.Failed,
+                    this._view.snack.show(
+                        MESSAGE_TYPE.Failed,
                         MESSAGE.REPEATED_GENRE_ERROR,
                     )
             }
@@ -152,13 +149,13 @@ class Controller {
                     this._model.songs.updateGenre(genre)
                     this.renderSong()
                 }
-                this._view.snack.render(
-                    SNACKBAR_TYPE.Success,
+                this._view.snack.show(
+                    MESSAGE_TYPE.Success,
                     MESSAGE.SAVE_SUCCESS,
                 )
             } catch (err) {
-                this._view.snack.render(
-                    SNACKBAR_TYPE.Failed,
+                this._view.snack.show(
+                    MESSAGE_TYPE.Failed,
                     MESSAGE.PROCESS_FAILED,
                 )
             }
@@ -194,15 +191,9 @@ class Controller {
             this._model.songs.removeSongByGenreId(genreId)
             this._view.genre.switchGenre()
             this.renderSong()
-            this._view.snack.render(
-                SNACKBAR_TYPE.Success,
-                MESSAGE.REMOVE_SUCCESS,
-            )
+            this._view.snack.show(MESSAGE_TYPE.Success, MESSAGE.REMOVE_SUCCESS)
         } catch (error) {
-            this._view.snack.render(
-                SNACKBAR_TYPE.Failed,
-                MESSAGE.PROCESS_FAILED,
-            )
+            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
         }
     }
 
@@ -251,10 +242,7 @@ class Controller {
             this._view.modal.render(MODAL_TYPE.SONG_DETAIL, song)
             this._view.modal.addEditSongListener(song, this.editSong)
         } else {
-            this._view.snack.render(
-                SNACKBAR_TYPE.Failed,
-                MESSAGE.PROCESS_FAILED,
-            )
+            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
         }
     }
 
@@ -266,15 +254,9 @@ class Controller {
         try {
             await this._model.songs.deleteSong(id)
             this.renderSong()
-            this._view.snack.render(
-                SNACKBAR_TYPE.Success,
-                MESSAGE.REMOVE_SUCCESS,
-            )
+            this._view.snack.show(MESSAGE_TYPE.Success, MESSAGE.REMOVE_SUCCESS)
         } catch {
-            this._view.snack.render(
-                SNACKBAR_TYPE.Failed,
-                MESSAGE.PROCESS_FAILED,
-            )
+            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
         }
     }
 
@@ -287,12 +269,9 @@ class Controller {
             const song = await this._model.songs.saveSong(data)
             song.genre = this._model.genres.getGenreById(data.genreId)
             this.renderSong()
-            this._view.snack.render(SNACKBAR_TYPE.Success, MESSAGE.SAVE_SUCCESS)
+            this._view.snack.show(MESSAGE_TYPE.Success, MESSAGE.SAVE_SUCCESS)
         } catch (error) {
-            this._view.snack.render(
-                SNACKBAR_TYPE.Failed,
-                MESSAGE.PROCESS_FAILED,
-            )
+            this._view.snack.show(MESSAGE_TYPE.Failed, MESSAGE.PROCESS_FAILED)
         }
     }
 }
