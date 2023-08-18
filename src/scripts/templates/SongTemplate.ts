@@ -5,9 +5,9 @@ class SongTemplate {
     constructor() {}
 
     /**
-     * template to render data row of song
+     * get the template to render data row of song
      * @param {SongModel} song model instance of the song
-     * @returns html string to render data row
+     * @returns html template
      */
     getSongTemplate = (song: SongModel): string => `
         <li class="li li--song" data-id="${song.id}">
@@ -43,9 +43,9 @@ class SongTemplate {
     `
 
     /**
-     * song detail template
+     * get song detail html template
      * @param {SongModel} song
-     * @returns html template of songDetail
+     * @returns html template
      */
     getSongDetail = (song: SongModel): string => `
         <div class="img-container">
@@ -73,6 +73,10 @@ class SongTemplate {
         </div>
     `
 
+    /**
+     * get the html for no song found
+     * @returns html template
+     */
     getNoneSongTemplate = (): string => `
         <li class="li text text-sub text-small mt20"> No song found</li>
     `

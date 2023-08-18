@@ -4,10 +4,10 @@ class GenreTemplate {
     constructor() {}
 
     /**
-     * genre html template
+     * get html template to render genres
      * @param {GenreModel} genre model instance of genre
      * @param {Boolean} active if the genre is selected or not
-     * @returns html to render genres
+     * @returns html template
      */
     getGenreTemplate = (genre: GenreModel, active?: boolean): string => `
         <li class="genres__list__item text text-sub ${

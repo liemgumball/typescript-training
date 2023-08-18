@@ -13,6 +13,9 @@ class Controller {
         this._model = model
     }
 
+    /**
+     * initializes the web site
+     */
     init = async (): Promise<void> => {
         try {
             this.initModal()
@@ -23,12 +26,18 @@ class Controller {
         }
     }
 
+    /**
+     * initialize the modal
+     */
     initModal = (): void => {
         this._view.modal.addCloseListener()
         this._view.modal.addAddSongListener(this.addSong)
         this._view.modal.addFormSubmitListener(this.saveSong)
     }
 
+    /**
+     * initialize Genres List and Events
+     */
     initGenre = async (): Promise<void> => {
         await this._model.genres.init()
         this._view.genre.renderList(this._model.genres.list)
@@ -38,6 +47,9 @@ class Controller {
         this._view.genre.addDelegateRemoveGenreListener(this.removeGenre)
     }
 
+    /**
+     * initialize Songs List and Events
+     */
     initSong = async (): Promise<void> => {
         await this._model.songs.init()
         this._view.song.renderList(this._model.songs.list)
@@ -46,32 +58,50 @@ class Controller {
         this._view.song.addDelegateRemoveSongListener(this.removeSong)
     }
 
-    renderSong = () => {
+    /**
+     * render song following the current selected genre and keyword
+     */
+    renderSong = (): void => {
         let songs = this._model.songs.getSongsByGenreId(
-            this._view.genre.getSelectedGenreId(),
+            this._view.genre.getCurrentGenreId(),
         )
         songs = this.filterSongByKeyword(songs)
         this._view.song.renderList(songs)
     }
 
-    switchGenre = (genreId?: string) => {
-        if (genreId !== this._view.genre.getSelectedGenreId()) {
+    /**
+     *  switch to selected genre if available
+     * @param genreId id of the genre selected
+     */
+    switchGenre = (genreId?: string): void => {
+        if (genreId !== this._view.genre.getCurrentGenreId()) {
             this._view.song.clearSearchKeyword()
             this._view.genre.switchGenre(genreId)
             this.renderSong()
         }
     }
 
-    addGenre = () => {
+    /**
+     * add genre feature
+     */
+    addGenre = (): void => {
         this._view.genre.genreInputPopup()
         this._view.genre.addSaveGenreListener(this.saveGenre)
     }
 
-    editGenre = (data: IGenre) => {
+    /**
+     * edit genre feature
+     * @param data information of the genre
+     */
+    editGenre = (data: IGenre): void => {
         this._view.genre.genreInputPopup(data)
         this._view.genre.addSaveGenreListener(this.saveGenre)
     }
 
+    /**
+     * save the genre and render
+     * @param data information of genre
+     */
     saveGenre = async (data: IGenre): Promise<void> => {
         if (this.checkGenre(data)) {
             try {
@@ -93,10 +123,15 @@ class Controller {
         }
     }
 
+    /**
+     * check if the given genre is available to save and handle if invalid
+     * @param data information of genre
+     * @returns if valid or not
+     */
     checkGenre = (data: IGenre): boolean => {
         // get the selected genre
         const genre = this._model.genres.getGenreById(
-            this._view.genre.getSelectedGenreId(),
+            this._view.genre.getCurrentGenreId(),
         )!
 
         // case value is empty
@@ -123,6 +158,10 @@ class Controller {
         }
     }
 
+    /**
+     * handle remove genre and render
+     * @param genreId id of the genre
+     */
     removeGenre = async (genreId: string): Promise<void> => {
         try {
             this._model.genres.removeGenre(genreId)
@@ -135,6 +174,11 @@ class Controller {
         }
     }
 
+    /**
+     * filter list of by keyword
+     * @param songs list of songs
+     * @returns filtered list
+     */
     filterSongByKeyword = (songs: SongModel[]): SongModel[] => {
         const keyword = this._view.song.getSearchKeyword()
         return songs.filter((item) => {
@@ -145,11 +189,18 @@ class Controller {
         })
     }
 
+    /**
+     * add song feature
+     */
     addSong = (): void => {
         this._view.modal.render(MODAL_TYPE.ADD_SONG)
         this._view.modal.setSelectOptions(this._model.genres.list)
     }
 
+    /**
+     * edit song feature
+     * @param song song to be edited
+     */
     editSong = (song: SongModel): void => {
         this._view.modal.render(MODAL_TYPE.EDIT_SONG, song)
         this._view.modal.setSelectOptions(
@@ -158,6 +209,10 @@ class Controller {
         )
     }
 
+    /**
+     * view song detail feature and add edit song listener
+     * @param id id of the song
+     */
     viewSongDetail = (id: string): void => {
         const song = this._model.songs.getSongById(id)
         if (song) {
@@ -169,6 +224,10 @@ class Controller {
         }
     }
 
+    /**
+     * remove song event
+     * @param id id of the song
+     */
     removeSong = async (id: string): Promise<void> => {
         try {
             await this._model.songs.deleteSong(id)
@@ -178,6 +237,10 @@ class Controller {
         }
     }
 
+    /**
+     * save the song and render
+     * @param data information of the song
+     */
     saveSong = async (data: ISong): Promise<void> => {
         try {
             const song = await this._model.songs.saveSong(data)

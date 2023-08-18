@@ -37,20 +37,28 @@ class ModalView {
         this.modal.classList.remove('open')
     }
 
+    /**
+     * add event listener closing modal
+     */
     addCloseListener = (): void => {
         this.modalClose.addEventListener('click', () => this.close())
     }
 
     /**
-     * adding the add song event listener
+     * add event listener adding song
+     * @param handleAddSong controller handle function
      */
-    addAddSongListener = (controllerAddSong: () => void): void => {
+    addAddSongListener = (handleAddSong: () => void): void => {
         this.addSongBtn.addEventListener('click', () => {
-            controllerAddSong()
+            handleAddSong()
         })
     }
 
-    addFormSubmitListener = (controllerSubmit: (data: ISong) => void): void => {
+    /**
+     * add event listener submiting
+     * @param handleSubmit controller handle function
+     */
+    addFormSubmitListener = (handleSubmit: (data: ISong) => void): void => {
         this.modalDialog.addEventListener('submit', (event) => {
             event.preventDefault()
 
@@ -73,7 +81,7 @@ class ModalView {
 
             const errors = this.validateInputData(data)
             if (!errors) {
-                controllerSubmit(data)
+                handleSubmit(data)
                 this.close()
             } else {
                 window.alert(errors)
@@ -81,17 +89,27 @@ class ModalView {
         })
     }
 
+    /**
+     * add event listener editting song
+     * @param song song instance to edit
+     * @param handleEditSong controller handle function
+     */
     addEditSongListener = (
         song: SongModel,
-        controllerEditSong: (song: SongModel) => void,
-    ) => {
+        handleEditSong: (song: SongModel) => void,
+    ): void => {
         const editBtn = document.querySelector('#modal__dialog__edit-btn')
         editBtn?.addEventListener('click', () => {
-            controllerEditSong(song)
+            handleEditSong(song)
         })
     }
 
-    validateInputData = (data: ISong) => {
+    /**
+     * validate song data
+     * @param data data of the song
+     * @returns error message if invalid
+     */
+    validateInputData = (data: ISong): string => {
         {
             let errors = COMMON.EMPTY
 
@@ -117,6 +135,11 @@ class ModalView {
         }
     }
 
+    /**
+     * render the modal
+     * @param type type of the modal
+     * @param data song data to render
+     */
     render = (type: string, data?: SongModel): void => {
         switch (type) {
             case MODAL_TYPE.SONG_DETAIL:
@@ -137,11 +160,20 @@ class ModalView {
         this.open()
     }
 
-    renderSongDetail = (data: SongModel) => {
+    /**
+     * render song detais
+     * @param data song data
+     */
+    renderSongDetail = (data: SongModel): void => {
         const template = Template.song.getSongDetail(data)
         this.modalDialog.innerHTML = template
     }
 
+    /**
+     * render form input fields of the song
+     * @param title title of the form
+     * @param data song data
+     */
     renderSongInput = (title: string, data?: SongModel): void => {
         this.modalDialog.setAttribute('data-id', data?.id || COMMON.EMPTY)
         const template = Template.modal.getSongInputForm(title, data)
@@ -153,6 +185,11 @@ class ModalView {
             })
     }
 
+    /**
+     * set options for the select input
+     * @param genres list of genres
+     * @param selectedOptionValue selected genre option
+     */
     setSelectOptions = (
         genres: GenreModel[],
         selectedOptionValue?: string,
