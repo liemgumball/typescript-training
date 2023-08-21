@@ -1,16 +1,16 @@
 import { COMMON } from '../constants/constants'
-import SongModel from '../models/SongModel'
+import SongModel from '../models/songModel'
 
 class ModalTemplate {
-    constructor() {}
+  constructor() {}
 
-    /**
-     * get the html to render the modal input form
-     * @param title title of the modal
-     * @param data data of the song
-     * @returns html template
-     */
-    getSongInputForm = (title: string, data?: SongModel): string => `
+  /**
+   * get the html to render the modal input form
+   * @param title title of the modal
+   * @param data data of the song
+   * @returns html template
+   */
+  getSongInputForm = (title: string, data?: SongModel): string => `
         <div class="modal__header">
             <p class="text text-bold text-big">${title}</p>
         </div>

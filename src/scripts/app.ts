@@ -1,13 +1,13 @@
-import Controller from './controllers/Controller'
-import Model from './models/Model'
-import View from './views/View'
+import Controller from './controllers/controller'
+import Model from './models/model'
+import View from './views/view'
 
 export class App {
-    constructor() {}
+  constructor() {}
 
-    public start = () => {
-        const controller = new Controller(new View(), new Model())
+  public start = () => {
+    const controller = new Controller(new View(), new Model())
 
-        controller.init()
-    }
+    controller.init()
+  }
 }

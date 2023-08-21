@@ -1,11 +1,11 @@
-import SongTemplate from './SongTemplate'
-import GenreTemplate from './GenreTemplate'
-import ModalTemplate from './ModalTemplate'
-import SnackTemplate from './SnackTemplate'
+import SongTemplate from './songTemplate'
+import GenreTemplate from './genreTemplate'
+import ModalTemplate from './modalTemplate'
+import SnackTemplate from './snackTemplate'
 
 export const Template = {
-    song: new SongTemplate(),
-    genre: new GenreTemplate(),
-    modal: new ModalTemplate(),
-    snack: new SnackTemplate(),
+  song: new SongTemplate(),
+  genre: new GenreTemplate(),
+  modal: new ModalTemplate(),
+  snack: new SnackTemplate(),
 }

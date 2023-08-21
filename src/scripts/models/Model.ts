@@ -1,14 +1,14 @@
-import GenreListModel from './GenreListModel'
-import SongListModel from './SongListModel'
+import GenreListModel from './genreListModel'
+import SongListModel from './songListModel'
 
 class Model {
-    public genres: GenreListModel
-    public songs: SongListModel
+  public genres: GenreListModel
+  public songs: SongListModel
 
-    constructor() {
-        this.genres = new GenreListModel()
-        this.songs = new SongListModel()
-    }
+  constructor() {
+    this.genres = new GenreListModel()
+    this.songs = new SongListModel()
+  }
 }
 
 export default Model
