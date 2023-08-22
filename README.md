@@ -3,7 +3,7 @@
 ## Target:
 
 -   Apply knowledge of HTML5/CSS3/TypeScript (with ES6 syntax).
--   Understand and apply MVC pattern.
+-   Understand and apply MVC pattern, OOP.
 -   Understand and apply Type Manipulation.
 
 ## Design on figma:
