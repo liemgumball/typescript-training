@@ -1,30 +1,20 @@
-import { MESSAGE } from '../constants/constants'
-import { MESSAGE_TYPE } from '../constants/enums'
-import { wait } from '../helpers/util'
-import { Template } from '../templates/Template'
+import { MessageType } from '../constants/enums'
+import { wait } from '../helpers/wait'
+import { Template } from '../templates/template'
 
 class SnackView {
-    private _snackbar: HTMLElement
+  private _snackbar: HTMLElement
 
-    constructor() {
-        this._snackbar = document.querySelector('.snack-bar')! as HTMLElement
-    }
+  constructor() {
+    this._snackbar = document.querySelector('.snack-bar')! as HTMLElement
+  }
 
-    show = async (
-        success: MESSAGE_TYPE,
-        message?: string,
-        reload?: boolean,
-    ): Promise<void> => {
-        if (success)
-            this._snackbar.innerHTML = Template.snack.getSuccessForm(message)
-        else this._snackbar.innerHTML = Template.snack.getFailedForm(message)
-        await wait(1500)
-
-        if (reload) {
-            if (confirm(MESSAGE.PROCESS_FAILED)) location.reload()
-        }
-        await wait(1500)
-        this._snackbar.innerHTML = ''
-    }
+  show = async (success: MessageType, message?: string): Promise<void> => {
+    if (success)
+      this._snackbar.innerHTML = Template.snack.getSuccessForm(message)
+    else this._snackbar.innerHTML = Template.snack.getFailedForm(message)
+    await wait(3000)
+    this._snackbar.innerHTML = ''
+  }
 }
 export default SnackView

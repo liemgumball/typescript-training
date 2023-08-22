@@ -1,23 +1,23 @@
 .input {
-    box-sizing: border-box;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    font-weight: var(--medium-font-weight);
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-weight: var(--medium-font-weight);
 }
 
 select {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .input--select > option {
-    padding: 5px;
-    border-radius: 5px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .input-container {
-    display: flex;
-    gap: 10px;
-    padding: 15px 20px;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  padding: 15px 20px;
+  align-items: center;
 }

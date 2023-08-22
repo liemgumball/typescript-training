@@ -1,31 +1,36 @@
-export enum apiMethods {
-    Get = 'GET',
-    Post = 'POST',
-    Put = 'PUT',
-    Patch = 'PATCH',
-    Delete = 'DELETE',
+// method of api request
+export enum ApiMethods {
+  Get = 'GET',
+  Post = 'POST',
+  Put = 'PUT',
+  Patch = 'PATCH',
+  Delete = 'DELETE',
 }
 
-export enum inValidGenreFields {
-    Empty,
-    Repeated,
+// detemine the which key typed on the keyboard
+export enum EventCode {
+  Enter = 'Enter',
+  Esc = 'Escape',
+  Tab = 'Tab',
 }
 
-// used to detemine the which key typed on the keyboard
-export enum EVENT_CODE {
-    ENTER = 'Enter',
-    ESC = 'Escape',
-    TAB = 'Tab',
+// type of modal to render
+export enum ModalType {
+  SongDetail,
+  AddSong,
+  EditSong,
 }
 
-// used to define type of the modal to render
-export enum MODAL_TYPE {
-    SONG_DETAIL = 'Song detail',
-    ADD_SONG = 'Add new song',
-    EDIT_SONG = 'Edit song',
+// type of message of snackbar
+export enum MessageType {
+  Failed = 0,
+  Success = 1,
 }
 
-export enum MESSAGE_TYPE {
-    Failed = 0,
-    Success = 1,
+// to define the error
+export enum ErrorCode {
+  PROCESS_FAILED,
+  WHITE_SPACE_INVALID,
+  LINK_INVALID,
+  REPEATED_ERROR,
 }
