@@ -29,7 +29,7 @@ class ModalTemplate {
                 name="Genre"
                 id="song__genre"
                 title="Genre"
-                value="${data?.genre?.id || COMMON.EMPTY}"
+                value="${data?.genreId || COMMON.EMPTY}"
             >
             </select>
             <input

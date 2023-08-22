@@ -225,7 +225,7 @@ class Controller {
    */
   private editSong = (song: SongModel): void => {
     this._view.modal.render(ModalType.EditSong, song)
-    this._view.modal.setSelectOptions(this._model.genres.list, song.genre?.id)
+    this._view.modal.setSelectOptions(this._model.genres.list, song.genreId)
   }
 
   /**

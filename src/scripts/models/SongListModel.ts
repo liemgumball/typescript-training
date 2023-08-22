@@ -35,23 +35,24 @@ class SongListModel {
     this._list.find((item) => item.id === id)
 
   /**
+   * get the song by its id
+   * @param id id of the song
+   * @returns song instance
+   */
+  getIndexById = (id: string): number =>
+    this._list.findIndex((item) => item.id === id)
+
+  /**
    * get songs following genre or all songs
    * @param genreId id of the genre
    * @returns list of songs
    */
   getSongsByGenreId = (genreId?: string): SongModel[] => {
-    if (genreId)
-      return this._list.filter((item: SongModel) => item.genre?.id === genreId)
-    else return this._list
-  }
-
-  /**
-   * get the song by its id
-   * @param id id of the song
-   * @returns song instance
-   */
-  getIndexById(id: string) {
-    return this._list.findIndex((item) => item.id === id)
+    if (genreId) {
+      return this._list.filter((item: SongModel) => item.genreId === genreId)
+    } else {
+      return this._list
+    }
   }
 
   /**
@@ -60,7 +61,7 @@ class SongListModel {
    */
   updateGenreForSong = (genre: GenreModel): void => {
     this._list.forEach((item) => {
-      if (item.genre?.id === genre.id) {
+      if (item.genreId === genre.id) {
         item.genre = genre
       }
     })
@@ -105,8 +106,9 @@ class SongListModel {
    */
   removeSongByGenreId = (genreId: string): void => {
     const songs: SongModel[] = this._list.filter(
-      (item) => item.genre?.id === genreId
+      (item) => item.genreId === genreId
     )
+
     songs.forEach((item) => {
       this._list.splice(this.getIndexById(item.id), 1)
     })

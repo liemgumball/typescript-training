@@ -1,5 +1,5 @@
 import { GENRE_RULES, SONG_RULES } from '../constants/constants'
-import { formatDateTime, nameDisplay } from '../helpers/format'
+import { formatDateTime, formatName } from '../helpers/format'
 import { getImgUrl, getVideoId } from '../helpers/songHelper'
 import SongModel from '../models/songModel'
 
@@ -20,7 +20,7 @@ class SongTemplate {
             src="${getImgUrl(song.link)}"
             alt="title image"
           />
-          <span> ${nameDisplay(song.title, SONG_RULES.ITEM_MAX_LENGTH)} </span>
+          <span> ${formatName(song.title, SONG_RULES.ITEM_MAX_LENGTH)} </span>
         </div>
         <div
           class="song__data song__artist text text-small text-light text-sub"
@@ -30,12 +30,12 @@ class SongTemplate {
         <div
           class="song__data song__genre text text-small text-light text-sub"
         >
-        ${nameDisplay(song.genre?.name!, GENRE_RULES.ITEM_MAX_LENGTH)}
+        ${formatName(song.genre?.name!, GENRE_RULES.ITEM_MAX_LENGTH)}
         </div>
         <div
           class="song__data song__date text text-small text-light text-sub"
         >
-          ${formatDateTime(song.lastEdited)}
+          ${formatDateTime(new Date(song.lastEdited))}
         </div>
       </div>
       <div class="song__remove">

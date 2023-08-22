@@ -5,7 +5,7 @@ export interface IGenre {
   name: string
 }
 
-class GenreModel {
+class GenreModel implements IGenre {
   public id: string
   public name: string
 
