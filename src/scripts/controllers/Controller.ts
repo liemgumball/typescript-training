@@ -27,6 +27,7 @@ class Controller {
       await this.initGenre()
       await this.initSong()
     } catch (error) {
+      console.error(error)
       this._view.snack.show(
         MessageType.Failed,
         ERROR_MESSAGES[ErrorCode.PROCESS_FAILED]

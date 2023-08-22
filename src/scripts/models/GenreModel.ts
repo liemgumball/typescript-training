@@ -1,7 +1,7 @@
 import { generateId } from '../helpers/songHelper'
 
 export interface IGenre {
-  id?: string
+  readonly id?: string
   name: string
 }
 

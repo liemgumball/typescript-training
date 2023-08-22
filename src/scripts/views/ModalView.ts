@@ -1,4 +1,4 @@
-import { COMMON, MODAL_TITLE } from '../constants/constants'
+import { COMMON, ERROR_MESSAGES, MODAL_TITLE } from '../constants/constants'
 import SongModel, { ISong } from '../models/songModel'
 import { Template } from '../templates/template'
 import GenreModel from '../models/genreModel'
@@ -80,7 +80,11 @@ class ModalView {
 
       const errors = this.validateInputData(data)
       if (errors.length > 0) {
-        window.alert(errors.join('\n'))
+        const messages: string[] = []
+        errors.forEach((error) => {
+          messages.push(ERROR_MESSAGES[error])
+        })
+        window.alert(messages.join('\n'))
       } else {
         handleSubmit(data)
         this.close()
@@ -113,7 +117,7 @@ class ModalView {
   validateInputData = (data: ISong): ErrorCode[] => {
     let errors: ErrorCode[] = []
 
-    if (!data.title && !data.artist && !data.link) {
+    if (!data.title || !data.artist || !data.link) {
       errors.push(ErrorCode.WHITE_SPACE_INVALID)
     }
 

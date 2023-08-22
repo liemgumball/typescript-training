@@ -2,7 +2,7 @@ import { generateId } from '../helpers/songHelper'
 import { IGenre } from './genreModel'
 
 export interface ISong {
-  id?: string
+  readonly id?: string
   title: string
   artist: string
   lastEdited: string

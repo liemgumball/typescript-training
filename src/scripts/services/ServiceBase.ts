@@ -13,7 +13,7 @@ class ServiceBase<T> {
    * @param body data to send
    * @returns promise of response
    */
-  private request = async <T>(
+  private request = async (
     path: string,
     method: ApiMethods,
     body?: T
@@ -43,7 +43,7 @@ class ServiceBase<T> {
    * @param endpoint endpoint of url request
    * @returns data or list of data response from server
    */
-  get = <T>(endpoint?: string): Promise<T> => {
+  get = (endpoint?: string): Promise<T> | Promise<T[]> => {
     return this.request(
       `${this._path}/${endpoint ? endpoint : ''}`,
       ApiMethods.Get
@@ -55,7 +55,7 @@ class ServiceBase<T> {
    * @param data data to send
    * @returns data response from server
    */
-  post = <T>(data: T): Promise<T> => {
+  post = (data: T): Promise<T> => {
     return this.request(this._path, ApiMethods.Post, data)
   }
 
@@ -65,7 +65,7 @@ class ServiceBase<T> {
    * @param data data to send
    * @returns data response from server
    */
-  put = <T>(endpoint: string, data: T): Promise<T> => {
+  put = (endpoint: string, data: T): Promise<T> => {
     return this.request(`${this._path}/${endpoint}`, ApiMethods.Put, data)
   }
 
@@ -75,7 +75,7 @@ class ServiceBase<T> {
    * @param data data to send
    * @returns data response from server
    */
-  patch = <T>(endpoint: string, data: T): Promise<T> => {
+  patch = (endpoint: string, data: T): Promise<T> => {
     return this.request(`${this._path}/${endpoint}`, ApiMethods.Patch, data)
   }
 
@@ -84,7 +84,7 @@ class ServiceBase<T> {
    * @param endpoint endpoint of url request
    * @returns status respone of request
    */
-  delete = <T>(endpoint: string): Promise<T> => {
+  delete = (endpoint: string): Promise<T> => {
     return this.request(`${this._path}/${endpoint}`, ApiMethods.Delete)
   }
 }

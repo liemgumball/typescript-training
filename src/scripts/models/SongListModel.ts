@@ -20,7 +20,7 @@ class SongListModel {
    * initialize the list of songs
    */
   init = async (): Promise<void> => {
-    const list: ISong[] = await this._service.get<ISong[]>('?_expand=genre')
+    const list: ISong[] = (await this._service.get('?_expand=genre')) as []
     this._list = list.map((item) =>
       parseData<ISong, SongModel>(item, SongModel)
     )

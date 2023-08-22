@@ -19,7 +19,7 @@ class GenreListModel {
    * initialize list of genres
    */
   init = async (): Promise<void> => {
-    const list: IGenre[] = await this._service.get<IGenre[]>()
+    const list: IGenre[] = (await this._service.get()) as []
     this._list = list.map((item) => parseData(item, GenreModel))
   }
 
