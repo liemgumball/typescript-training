@@ -1,4 +1,4 @@
-import { COMMON } from '../constants/constants'
+import { COMMON, RESOURCE_NAME } from '../constants/constants'
 import { parseData } from '../helpers/parse'
 import ServiceBase from '../services/serviceBase'
 import GenreModel from './genreModel'
@@ -9,7 +9,9 @@ class SongListModel {
   private _service: ServiceBase<ISong>
 
   constructor() {
-    this._service = new ServiceBase<ISong>(`${process.env.API_GATEWAY}/songs`)
+    this._service = new ServiceBase<ISong>(
+      `${process.env.API_GATEWAY + RESOURCE_NAME.SONGS}`
+    )
   }
 
   get list() {
@@ -20,7 +22,9 @@ class SongListModel {
    * initialize the list of songs
    */
   init = async (): Promise<void> => {
-    const list: ISong[] = (await this._service.get('?_expand=genre')) as []
+    const list: ISong[] = (await this._service.get(
+      RESOURCE_NAME.GENRE_RELATION
+    )) as []
     this._list = list.map((item) =>
       parseData<ISong, SongModel>(item, SongModel)
     )

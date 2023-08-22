@@ -16,7 +16,8 @@ class GenreTemplate {
       active ? 'active' : ''
     }" data-id="${genre.id}" title="${genre.name}">
       ${formatName(genre.name, GENRE_RULES.ITEM_MAX_LENGTH)}
-      <button class="genre__remove btn btn--icon fas fa-trash"></button>
+      <button class="genre__remove btn btn--icon fas fa-trash" title="remove genre">
+      </button>
     </li>
     `
 }
