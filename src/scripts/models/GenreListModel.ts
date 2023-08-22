@@ -1,4 +1,4 @@
-import { COMMON } from '../constants/constants'
+import { COMMON, RESOURCE_NAME } from '../constants/constants'
 import { parseData } from '../helpers/parse'
 import ServiceBase from '../services/serviceBase'
 import GenreModel, { IGenre } from './genreModel'
@@ -8,7 +8,9 @@ class GenreListModel {
   private _service: ServiceBase<IGenre>
 
   constructor() {
-    this._service = new ServiceBase<IGenre>(`${process.env.API_GATEWAY}/genres`)
+    this._service = new ServiceBase<IGenre>(
+      `${process.env.API_GATEWAY + RESOURCE_NAME.GENRES}`
+    )
   }
 
   get list() {

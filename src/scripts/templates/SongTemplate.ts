@@ -39,7 +39,7 @@ class SongTemplate {
         </div>
       </div>
       <div class="song__remove">
-        <button class="btn btn--icon fas fa-trash"></button>
+        <button class="btn btn--icon fas fa-trash" title="remove song"></button>
       </div>
     </li>
   `

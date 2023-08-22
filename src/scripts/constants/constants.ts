@@ -49,3 +49,10 @@ export const ERROR_MESSAGES = {
   [ErrorCode.LINK_INVALID]: 'Invalid link format!',
   [ErrorCode.REPEATED_ERROR]: 'Can not save this! Repeated name',
 }
+
+// resources of database
+export const RESOURCE_NAME = {
+  SONGS: '/songs',
+  GENRES: '/genres',
+  GENRE_RELATION: '?_expand=genre',
+}
