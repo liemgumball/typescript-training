@@ -97,7 +97,7 @@ npm install
 -   Step 05: Run json-server
 
 ```bash
-json-server --watch src/json-server/db.json
+json-server --watch src/json-server/db.json --port 3000
 ```
 
 -   Step 06: Run
