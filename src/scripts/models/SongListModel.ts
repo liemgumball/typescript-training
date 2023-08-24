@@ -9,6 +9,7 @@ class SongListModel {
   private _service: ServiceBase<ISong>
 
   constructor() {
+    this._list = []
     this._service = new ServiceBase<ISong>(
       `${process.env.API_GATEWAY + RESOURCE_NAME.SONGS}`
     )
