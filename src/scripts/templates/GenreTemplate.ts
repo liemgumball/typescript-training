@@ -1,5 +1,5 @@
 import { GENRE_RULES } from '../constants/constants'
-import { formatName } from '../helpers/format'
+import { truncateName } from '../helpers/format'
 import GenreModel from '../models/genreModel'
 
 class GenreTemplate {
@@ -15,7 +15,7 @@ class GenreTemplate {
     <li class="genres__list__item text text-sub ${
       active ? 'active' : ''
     }" data-id="${genre.id}" title="${genre.name}">
-      ${formatName(genre.name, GENRE_RULES.ITEM_MAX_LENGTH)}
+      ${truncateName(genre.name, GENRE_RULES.ITEM_MAX_LENGTH)}
       <button class="genre__remove btn btn--icon fas fa-trash" title="remove genre">
       </button>
     </li>

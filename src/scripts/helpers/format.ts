@@ -4,7 +4,7 @@
  * @param length max length of data to format
  * @returns formatted name
  */
-export const formatName = (name: string, length: number): string =>
+export const truncateName = (name: string, length: number): string =>
   name.length < length ? name : name.slice(0, length) + '...'
 
 /**
