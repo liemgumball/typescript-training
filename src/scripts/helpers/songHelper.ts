@@ -16,7 +16,7 @@ export const generateId = (): string => {
  * @returns link of the song banner
  */
 export const getImgUrl = (link: string): string => {
-  return TEMPLATE.SONG_IMG_URL_TEMPLATE.replace('videoId', getVideoId(link)) //get the video id
+  return TEMPLATE.SONG_IMG_URL_TEMPLATE.replace('videoId', getVideoId(link))
 }
 
 /**

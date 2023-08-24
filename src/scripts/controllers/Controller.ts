@@ -48,23 +48,23 @@ class Controller {
    * initialize Genres List and Events
    */
   private initGenre = async (): Promise<void> => {
-    await this._model.genres.init()
-    this._view.genre.renderList(this._model.genres.list)
     this._view.genre.addDelegateSwitchGenreListener(this.switchGenre)
-    this._view.genre.addAddGenreListener(this.addGenre)
     this._view.genre.addDelegateEditGenreListener(this.editGenre)
     this._view.genre.addDelegateRemoveGenreListener(this.removeGenre)
+    await this._model.genres.init()
+    this._view.genre.renderList(this._model.genres.list)
+    this._view.genre.addAddGenreListener(this.addGenre)
   }
 
   /**
    * initialize Songs List and Events
    */
   private initSong = async (): Promise<void> => {
+    this._view.song.addDelegateViewSongDetailListener(this.viewSongDetail)
+    this._view.song.addDelegateRemoveSongListener(this.removeSong)
     await this._model.songs.init()
     this._view.song.renderList(this._model.songs.list)
     this._view.song.addSearchSongListener(this.renderSong)
-    this._view.song.addDelegateViewSongDetailListener(this.viewSongDetail)
-    this._view.song.addDelegateRemoveSongListener(this.removeSong)
   }
 
   /**

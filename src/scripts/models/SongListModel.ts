@@ -9,6 +9,7 @@ class SongListModel {
   private _service: ServiceBase<ISong>
 
   constructor() {
+    this._list = []
     this._service = new ServiceBase<ISong>(
       `${process.env.API_GATEWAY + RESOURCE_NAME.SONGS}`
     )
@@ -25,9 +26,12 @@ class SongListModel {
     const list: ISong[] = (await this._service.get(
       RESOURCE_NAME.GENRE_RELATION
     )) as []
-    this._list = list.map((item) =>
-      parseData<ISong, SongModel>(item, SongModel)
-    )
+    this._list = list
+      .map((item) => parseData<ISong, SongModel>(item, SongModel))
+      .sort(
+        (a, b) =>
+          Number(new Date(b.lastEdited)) - Number(new Date(a.lastEdited))
+      )
   }
 
   /**
@@ -82,7 +86,7 @@ class SongListModel {
         await this._service.post(data),
         SongModel
       )
-      this._list.push(song)
+      this._list.unshift(song)
       return song
     } else {
       const song: SongModel = parseData<ISong, SongModel>(
@@ -90,7 +94,8 @@ class SongListModel {
         SongModel
       )
       const idx: number = this._list.findIndex((item) => item.id === song.id)
-      this._list[idx] = song
+      this._list.splice(idx, 1)
+      this._list.unshift(song)
       return song
     }
   }

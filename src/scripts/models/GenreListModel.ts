@@ -8,6 +8,7 @@ class GenreListModel {
   private _service: ServiceBase<IGenre>
 
   constructor() {
+    this._list = []
     this._service = new ServiceBase<IGenre>(
       `${process.env.API_GATEWAY + RESOURCE_NAME.GENRES}`
     )

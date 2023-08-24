@@ -52,12 +52,16 @@ class ModalTemplate {
             />
         </div>
         <div class="modal__footer">
-            <button type="submit" class="ipnut btn btn--primary btn--fixed-width">
+            <button type="submit" 
+            class="ipnut btn btn--primary btn--fixed-width
+                    text text-small text-black"
+            >
                 Submit
             </button>
             <button
                 type="button"
-                class="ipnut btn btn--fixed-width" 
+                class="ipnut btn btn--fixed-width 
+                        text text-small text-black" 
                 id="modal__dialog__cancel-btn"
             >
                 Cancel

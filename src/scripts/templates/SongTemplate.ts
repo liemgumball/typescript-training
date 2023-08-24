@@ -1,5 +1,5 @@
 import { GENRE_RULES, SONG_RULES } from '../constants/constants'
-import { formatDateTime, formatName } from '../helpers/format'
+import { formatDateTime, truncateName } from '../helpers/format'
 import { getImgUrl, getVideoId } from '../helpers/songHelper'
 import SongModel from '../models/songModel'
 
@@ -20,7 +20,7 @@ class SongTemplate {
             src="${getImgUrl(song.link)}"
             alt="title image"
           />
-          <span> ${formatName(song.title, SONG_RULES.ITEM_MAX_LENGTH)} </span>
+          <span> ${truncateName(song.title, SONG_RULES.ITEM_MAX_LENGTH)} </span>
         </div>
         <div
           class="song__data song__artist text text-small text-light text-sub"
@@ -30,7 +30,7 @@ class SongTemplate {
         <div
           class="song__data song__genre text text-small text-light text-sub"
         >
-        ${formatName(song.genre?.name!, GENRE_RULES.ITEM_MAX_LENGTH)}
+        ${truncateName(song.genre?.name!, GENRE_RULES.ITEM_MAX_LENGTH)}
         </div>
         <div
           class="song__data song__date text text-small text-light text-sub"
@@ -65,10 +65,11 @@ class SongTemplate {
           </p>
         </div>
         <div class="modal__footer">
-          <button type="button" class="btn btn--primary btn--fixed-width"
+          <button type="button" 
+            class="btn btn--primary btn--fixed-width text text-small text-black"
             id="modal__dialog__edit-btn"
           >
-            <p class="text text-small text-black">Edit song</p>
+            Edit song
           </button>
         </div>
     `
