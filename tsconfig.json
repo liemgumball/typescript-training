@@ -7,7 +7,9 @@
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "strictNullChecks": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
