@@ -1,0 +1,30 @@
+:root {
+    --main-background-color: #000;
+    --second-background-color: #121212;
+    --third-background-color: #242424;
+    --fourth-background-color: #727272;
+    --modal-background-color: rgba(0, 0, 0, 0.5);
+
+    --green-color: #1ed760;
+    --blue-color: #034e80;
+
+    --main-font-color: #fff;
+    --secondary-font-color: #a7a7a7;
+    --sub-font-color: #b3b3b3;
+
+    --medium-font-weight: 700;
+    --light-font-weight: 400;
+    --strong-font-weight: 900;
+
+    --normal-font-size: 15px;
+    --small-font-size: 13px;
+    --big-font-size: 40px;
+    --max-font-size: 78px;
+
+    --normal-line-height: normal;
+    --large-line-height: 170%;
+
+    --transition-slow: all 500ms ease-in 0s;
+    --transition-fast: all 50ms ease-in 0s;
+    --transition-delay: all 250ms ease-in 300ms;
+}

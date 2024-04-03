@@ -1,0 +1,26 @@
+.aside {
+  background-color: var(--second-background-color);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+  flex-shrink: 1;
+}
+
+.aside > button {
+  min-height: 57px;
+  background-color: var(--third-background-color);
+  border-radius: 8px;
+  border: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .aside {
+    flex-direction: row;
+  }
+  .aside > button {
+    min-width: 70px;
+  }
+}

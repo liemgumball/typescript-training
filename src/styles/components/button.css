@@ -1,0 +1,28 @@
+.btn {
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.btn:hover {
+    box-shadow: 0 0px 16px rgba(255, 255, 255, 0.2);
+}
+
+.btn--icon {
+    border-radius: 50%;
+}
+
+.btn--dark:hover {
+    background-color: var(--fourth-background-color);
+}
+
+.btn--primary {
+    background-color: var(--green-color);
+}
+
+.btn--fixed-width {
+    width: 100px;
+    height: 35px;
+}

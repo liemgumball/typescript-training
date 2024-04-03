@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TypeScript Pratice</title>
+    <link rel="icon" href="assets/images/logo.jpg" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="img-container">
+          <img
+            class="header-img"
+            src="assets/images/thumbnail.jpg"
+            alt="thumbnail"
+          />
+        </div>
+        <div class="title-container">
+          <p class="text text-small">Playlist</p>
+          <h1 class="text text-max">The TypeScript Practice</h1>
+          <p class="text text-small text-sub text-light">Made by Liem Nguyen</p>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <aside class="aside">
+        <ul class="genres__list">
+          <li class="genres__list__item active text text-sub">All</li>
+        </ul>
+        <button
+          id="add-genre-btn"
+          type="button"
+          class="btn btn--dark fas fa-plus"
+          title="Add genre"
+        ></button>
+      </aside>
+      <article class="article">
+        <div class="tool-bar">
+          <button
+            class="btn btn--primary tool-bar__add-song"
+            id="add-song-btn"
+            type="button"
+            title="Add song"
+          >
+            <i class="fas fa-plus"></i>
+            <span class="text text-black text-small">New song</span>
+          </button>
+          <div class="snack-bar"></div>
+          <div class="input-container">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              title="Search"
+              name="search-input"
+              id="search-song-input"
+              class="input text"
+              placeholder="Search by Title, Artist"
+            />
+          </div>
+        </div>
+        <div class="ul__heading">
+          <div class="song__panel__headding">
+            <div class="text text-small text-light text-sub">Title</div>
+            <div class="text text-small text-light text-sub">Artist</div>
+            <div class="text text-small text-light text-sub">Genre</div>
+            <div class="text text-small text-light text-sub">Last Modified</div>
+          </div>
+          <div class="text text-small text-light text-sub">Remove</div>
+        </div>
+        <hr />
+        <ul class="song__panel songs__list">
+          <li class="li">
+            <div class="song-loading">
+              <div class="dflex g20">
+                <div class="data-loading img"></div>
+                <div class="data-loading title"></div>
+              </div>
+              <div>
+                <div class="data-loading artist"></div>
+              </div>
+              <div>
+                <div class="data-loading genre"></div>
+              </div>
+              <div>
+                <div class="data-loading last-edited"></div>
+              </div>
+            </div>
+            <div class="song-remove-loading">
+              <div class="data-loading remove"></div>
+            </div>
+          </li>
+        </ul>
+      </article>
+    </main>
+    <div class="modal">
+      <div class="modal__close"></div>
+      <form class="modal__dialog" id="formInputData"></form>
+    </div>
+    <script type="module" src="scripts/main.ts"></script>
+  </body>
+</html>

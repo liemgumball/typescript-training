@@ -1,0 +1,8 @@
+node_modules
+.parcel
+.parcel-cache
+dist
+.prettierrc
+.vercel
+.env
+package-lock.json

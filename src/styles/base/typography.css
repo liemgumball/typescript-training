@@ -1,0 +1,51 @@
+@font-face {
+    font-family: Arial, Helvetica, sans-serif;
+    src: url(../../assets/fonts/ARIAL.woff);
+}
+
+.text {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--main-font-color);
+    font-weight: var(--medium-font-weight);
+    line-height: var(--normal-line-height);
+}
+
+.text-normal {
+    font-size: var(--normal-font-size);
+}
+
+.text-black {
+    color: var(--main-background-color);
+}
+
+.text-secondary {
+    color: var(--secondary-font-color);
+}
+
+.text-sub {
+    color: var(--sub-font-color);
+}
+
+.text-small {
+    font-size: var(--small-font-size);
+}
+
+.text-big {
+    font-size: var(--big-font-size);
+}
+
+.text-max {
+    font-size: var(--max-font-size);
+}
+
+.text-bold {
+    font-weight: var(--strong-font-weight);
+}
+
+.text-light {
+    font-weight: var(--light-font-weight);
+}
+
+.large-line-height {
+    line-height: var(--large-line-height);
+}
